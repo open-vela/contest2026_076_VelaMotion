@@ -199,19 +199,71 @@ nsh> mount -t vfat /dev/mmcsd1 /mnt # 网关板：microSD
 
 ---
 
-## 六、当前进度与后续工作
+## 六、当前交付边界与后续工作
 
-本仓提交的是**可编译、可启动、可验证基础外设**的板级适配基线。为透明起见，
-以下是明确尚未完成、或需要在真机上确认的部分（同样列在板级适配指南第八节）：
+### 6.1 当前固件里有什么、开机能看到什么
 
-1. **三个 chip/vendor 层钩子需真机确认**：`ESP32S3_PIN2IRQ()`（W5500 中断映射宏名）、
-   `board_sdmmc_initialize()`、`board_wlan_init()`。三者均按上游 `esp32s3-eye`
-   的调用方式书写，源码中标注为 `NOTE(verify)`。
-2. **ICM-42688 传感器驱动**：节点板双 IMU 总线已就绪，传感器注册默认关闭，
-   需确认 `drivers/sensors/` 是否已有该驱动。
-3. **PN5180 NFC 协议栈**：本次仅板级 glue。
-4. **ESP-NOW TDMA 协议层**（原固件 `esp_tdma_mac`）尚未移植。
-5. **defconfig 真机校正**：提交前用 `make menuconfig` + `make savedefconfig` 回写。
+**本次交付的是 openvela 的板级适配，不是把 SomatoSync 应用搬到 openvela 上运行。**
+为避免误判，这里把边界写清楚。
+
+固件里**有**：
+
+| 内容 | 说明 |
+| --- | --- |
+| 硬件定义 | 两块自研板的完整引脚映射（W5500 / PN5180 / SSD1306 / microSD / 双 IMU / 电池） |
+| 板型划分 | `gateway` / `node` 两套 defconfig，同一板目录条件编译 |
+| 板级驱动初始化 | `somatosync_bringup()`：SSD1306 OLED（`/dev/lcd0`）、W5500 以太网、microSD、Wi-Fi / ESP-NOW 底层能力 |
+| openvela 系统本体 | `open-vela/nuttx`（分支 `dev-ai-contest-2026`）+ espressif 芯片层 |
+| 可烧录镜像 | 网关板 `nuttx.bin` 834.9 KB、节点板 671.9 KB，两套均编译通过 |
+
+固件里**没有**：
+
+| 未包含 | 原因 |
+| --- | --- |
+| ESP-NOW TDMA 时隙调度 | 建立在 ESP-IDF 的 `esp_now_*` API 之上，需重写到 NuttX socket |
+| 双 ESKF 姿态融合 / 双 IMU 在线校准 | 依赖 FreeRTOS 双核任务模型，需映射到 NuttX task / pthread |
+| 网关状态机、OLED 菜单与五向键 | 建立在 ESP-IDF NVS 与驱动之上，属应用层工作 |
+| AI 康复报告、ROS 2 上位机链路 | 属应用层与上位机，不在板级适配范围 |
+
+**烧录后能看到什么**（这是当前「能跑」的实际水平）：
+
+```
+nsh> uname -a           # NuttX ... xtensa somatosync_esp32s3
+nsh> ls /dev            # 出现 lcd0 / i2c0 / mmcsd1 等设备节点
+nsh> i2c dev 0x03 0x3c  # SSD1306 应答
+nsh> ifconfig eth0      # 网关板：W5500
+```
+
+即 **操作系统起来了、外设可控** —— 这正是板级适配赛道的验收范围。
+
+### 6.2 从「板子跑起来」到「应用跑起来」还差两步
+
+**第一步：应用移植。** 把 `gateway_app` / `node_app` 的逻辑按 NuttX 的 POSIX API 重写，
+做成 openvela 的 app 形态（`app/<name>/` + `Kconfig` + `Make.defs`，注册为 builtin），
+再由 manifest 的 `<linkfile>` 映射进编译树，defconfig 中打开后在 `nsh>` 下直接执行。
+
+**第二步：协议层映射**（工作量最大）：
+
+| 原方案（ESP-IDF） | 目标（NuttX / POSIX） |
+| --- | --- |
+| `esp_now_send` / `esp_now_recv` | NuttX raw socket + `esp32s3_wifi_adapter` |
+| FreeRTOS task / queue | NuttX task / `mq_*` / pthread |
+| Core0 / Core1 双核 + `__atomic_*` | NuttX SMP spinlock / atomic / CPU 亲和 |
+| `esp_timer_get_time()` | `clock_gettime()` |
+| `nvs_flash` | NuttX MTD + littlefs / FAT |
+| `ESP_LOGI` / `ESP_ERROR_CHECK` | `syslog()` / 返回码检查 |
+
+### 6.3 其它后续工作
+
+1. **ICM-42688 传感器驱动**：节点板双 IMU 的 SPI 总线已在 defconfig 与
+   `board.h` 中就绪，但传感器注册默认关闭（`CONFIG_SOMATOSYNC_IMU=n`）——
+   需先确认 `drivers/sensors/` 是否已提供 ICM-42688 驱动。
+2. **PN5180 NFC 协议驱动**：本次只做板级 glue（SPI3 + BUSY / RST），
+   「碰一碰配网」协议栈是后续工作。
+3. **ESP-NOW TDMA 协议层**：见 6.2 第二步。
+4. **电源与时序**：节点板的 LDO 门控与 ADC 分压 MOS 的时序需要在真机上标定。
+5. **真机验证**：两套固件均已完成编译链接并通过符号表核对（板级函数确实在镜像内），
+   但**尚未在真机上启动过**；引脚映射需对照原理图复核后再烧录。
 
 ---
 
