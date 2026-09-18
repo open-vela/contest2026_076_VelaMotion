@@ -1,0 +1,49 @@
+############################################################################
+# contest2026_076_VelaMotion/board/somatosync_esp32s3/scripts/Make.defs
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# ESP32-S3 toolchain and linker-script selection.
+#
+# This file is chip-generic: the toolchain defs, peripheral linker script and
+# ROM alias script all come from the esp32s3 chip layer, so the substance is
+# the same as the upstream reference board esp32s3-eye. Only the board
+# identity differs. configure.sh finds it via
+#   ${configpath}/../../scripts/Make.defs
+############################################################################
+
+include $(TOPDIR)/.config
+include $(TOPDIR)/tools/Config.mk
+include $(TOPDIR)/tools/esp32s3/Config.mk
+include $(TOPDIR)/arch/xtensa/src/lx7/Toolchain.defs
+
+ARCHSCRIPT += $(BOARD_COMMON_DIR)$(DELIM)scripts$(DELIM)esp32s3_peripherals.ld
+ARCHSCRIPT += $(BOARD_COMMON_DIR)$(DELIM)scripts$(DELIM)esp32s3_rom_aliases.ld
+
+# Pick the linker scripts from the board level if they exist, if not
+# pick the common linker scripts.
+
+ifeq ($(CONFIG_BUILD_PROTECTED),y)
+  ARCHSCRIPT += $(call FINDSCRIPT,protected_memory.ld)
+  ARCHSCRIPT += $(call FINDSCRIPT,kernel-space.ld)
+else
+  ARCHSCRIPT += $(call FINDSCRIPT,flat_memory.ld)
+  ifneq ($(CONFIG_ESP32S3_APP_FORMAT_LEGACY),y)
+    ARCHSCRIPT += $(call FINDSCRIPT,esp32s3_sections.ld)
+  else
+    ARCHSCRIPT += $(call FINDSCRIPT,legacy_sections.ld)
+  endif
+endif
+
+ifneq ($(CONFIG_DEBUG_NOOPT),y)
+  ARCHOPTIMIZATION += -fno-strength-reduce
+endif
+
+ARCHPICFLAGS = -fpic
+
+CFLAGS := $(ARCHCFLAGS) $(ARCHOPTIMIZATION) $(ARCHCPUFLAGS) $(ARCHINCLUDES) $(ARCHDEFINES) $(EXTRAFLAGS)
+CPICFLAGS = $(ARCHPICFLAGS) $(CFLAGS)
+CXXFLAGS := $(ARCHCXXFLAGS) $(ARCHOPTIMIZATION) $(ARCHCPUFLAGS) $(ARCHXXINCLUDES) $(ARCHDEFINES) $(EXTRAFLAGS)
+CXXPICFLAGS = $(ARCHPICFLAGS) $(CXXFLAGS)
+CPPFLAGS := $(ARCHINCLUDES) $(ARCHDEFINES) $(EXTRAFLAGS)
+AFLAGS := $(CFLAGS) -D__ASSEMBLY__

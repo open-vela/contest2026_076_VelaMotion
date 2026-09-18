@@ -52,6 +52,12 @@ CONFIG_SMP_NCPUS=2
 CONFIG_TIMER=y
 
 #
+# Task-local storage: the esp32s3 Wi-Fi adapter calls
+# task_tls_alloc()/task_tls_get_value()/task_tls_set_value().
+#
+CONFIG_TLS_TASK_NELEM=4
+
+#
 # Board: SomatoSync wearable node variant
 #
 CONFIG_SOMATOSYNC_BOARD_NODE=y
