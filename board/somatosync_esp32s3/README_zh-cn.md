@@ -48,7 +48,12 @@ board/somatosync_esp32s3/
 │   ├── somatosync_appinit.c      # board_app_initialize()（BOARDIOC_INIT）
 │   ├── somatosync_bringup.c      # 板级外设总 bring-up
 │   ├── somatosync_board_lcd.c    # SSD1306 OLED（图形能力落地点）
-│   └── somatosync_board_eth.c    # W5500 以太网板级 glue
+│   ├── somatosync_board_eth.c    # W5500 以太网板级 glue
+│   └── somatosync_board_spi.c    # 芯片层要求的板级 SPI status 实现
+├── scripts/                      # configure.sh 定位的构建脚本目录
+│   ├── Make.defs                 # 工具链与链接脚本选择（必需）
+│   └── patches/
+│       └── 0001-esp-hal-3rdparty-fix-spinlock-init.patch
 └── configs/
     ├── gateway/defconfig         # 网关板
     └── node/defconfig            # 节点板
@@ -103,10 +108,91 @@ vendor/espressif/boards/esp32s3/somatosync_esp32s3/   ← 本目录
 
 ## 四、编译
 
+### 4.1 首次构建前置条件（实测，缺一不可）
+
+以下四项都是在真机编译过程中**实际踩到并解决**的，不是推测。`esp32s3-eye` 的
+官方文档只覆盖了其中一部分，其余是这个工作区首次构建 ESP32-S3 时才会暴露的问题。
+
+**① 把 xtensa 工具链加入 PATH**
+
+`build.sh` **不会**自己 `source build/envsetup.sh`，而工具链的 PATH 正是在那里设置的
+（`build/envsetup.sh` 第 1123 行）。更麻烦的是，脚本里那条通用 glob
+（`xtensa{,-none}-{eabi,elf}/bin`）**匹配不到** `xtensa-esp32s3-elf` 这个名字，
+所以即便 source 了也仍然找不到编译器。必须显式指定：
+
+```bash
+export PATH=$PWD/prebuilts/gcc/linux-x86_64/xtensa-esp32s3-elf/bin:$PATH
+```
+
+不设的后果很隐蔽：`xtensa-esp32s3-elf-gcc: 未找到命令`，但 `make` 不会立刻退出，
+而是继续空转 —— 看起来像"编译很慢"，实际一个目标文件都没产出。
+
+**② 板目录必须有 `scripts/Make.defs`**
+
+`nuttx/tools/configure.sh` 按固定顺序查找 `Make.defs`，其中一条是：
+
+```
+src_makedefs=${configpath}/../../scripts/Make.defs
+```
+
+即 `<板目录>/scripts/Make.defs`。缺了它配置阶段直接报
+`File Make.defs could not be found` 并中止。该文件内容是 ESP32-S3 芯片级通用的
+（工具链 defs + 链接脚本选择），与具体板子无关。
+
+**③ 必须手工应用 esp-hal-3rdparty 的 spinlock 补丁**
+
+`nuttx/arch/xtensa/src/esp32s3/Make.defs` 会自行克隆
+`espressif/esp-hal-3rdparty` 到 `<工作区>/nxtmpdir/` 缓存再拷进 `chip/`，
+但克隆下来停在 `main` 分支，而 `main` 上 `components/esp_hw_support/clk_ctrl_os.c` 的
+`LOCK_INITIALIZER_UNLOCKED` 是 `0`，编不过：
+
+```
+error: invalid initializer
+  static lock_type_t periph_spinlock = LOCK_INITIALIZER_UNLOCKED;
+```
+
+补丁把它改成 `SP_UNLOCKED`，本目录已随仓提供：
+`scripts/patches/0001-esp-hal-3rdparty-fix-spinlock-init.patch`。
+
+> ⚠️ **注意**：`esp32s3-eye` 的 README 称 `build.sh` 会自动重新应用该补丁，
+> 但本工作区版本的 `build.sh` 及全树任何 `.sh` / `.mk` / `CMakeLists.txt` 里
+> **都没有这个逻辑**（已逐文件 grep 确认）。所以必须手工执行，且**克隆完成后**
+> 才能打（构建系统会重新克隆 `chip/esp-hal-3rdparty`，早打会被覆盖）。
+
+```bash
+cd nuttx/arch/xtensa/src/esp32s3/esp-hal-3rdparty
+git apply -p1 <板目录>/scripts/patches/0001-esp-hal-3rdparty-fix-spinlock-init.patch
+```
+
+**④ 板级必须提供 `esp32s3_spi<N>_status()`**
+
+芯片层的 SPI ops 表引用了 `esp32s3_spi2_status()`，但这个函数**故意不在芯片层实现**
+——每块 ESP32-S3 板自己提供（答案取决于板子怎么接片选）。本板由
+`src/somatosync_board_spi.c` 提供。缺了会在链接阶段报：
+
+```
+undefined reference to `esp32s3_spi2_status'
+```
+
+**⑤ `CONFIG_TLS_TASK_NELEM` 必须 > 0**
+
+esp32s3 的 Wi-Fi 适配层调用 `task_tls_alloc()` / `task_tls_get_value()` /
+`task_tls_set_value()`，这些函数在 `nuttx/libs/libc/tls/` 下受
+`CONFIG_TLS_TASK_NELEM` 保护。本仓两个 defconfig 均已设为 `4`。缺了会在链接阶段报：
+
+```
+undefined reference to `task_tls_alloc'
+```
+
+### 4.2 编译命令
+
 openvela 统一入口是工作区根目录的 `build.sh`，参数为 **board config 路径**：
 
 ```bash
 cd <openvela 工作区根目录>
+
+# 先按 4.1 ① 设置工具链 PATH
+export PATH=$PWD/prebuilts/gcc/linux-x86_64/xtensa-esp32s3-elf/bin:$PATH
 
 # 网关板
 ./build.sh vendor/espressif/boards/esp32s3/somatosync_esp32s3/configs/gateway -j$(nproc)
@@ -114,6 +200,10 @@ cd <openvela 工作区根目录>
 # 节点板
 ./build.sh vendor/espressif/boards/esp32s3/somatosync_esp32s3/configs/node -j$(nproc)
 ```
+
+> 首次构建时 `build.sh` 会自动克隆 `esp-hal-3rdparty`（全量克隆，含 ESP-IDF 的
+> Wi-Fi 固件等大文件，**需要数分钟到十几分钟**，请耐心等待，不要中断）。克隆完成后
+> 再执行 4.1 ③ 的补丁，然后重新运行一次 `build.sh`。
 
 产物在 `nuttx/` 下：`nuttx`（ELF）、`nuttx.bin`（平面镜像）、`nuttx.hex`。
 

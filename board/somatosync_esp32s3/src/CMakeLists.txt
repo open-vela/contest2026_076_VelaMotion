@@ -21,4 +21,8 @@ if(CONFIG_SOMATOSYNC_W5500)
   list(APPEND SRCS somatosync_board_eth.c)
 endif()
 
+if(CONFIG_ESP32S3_SPI)
+  list(APPEND SRCS somatosync_board_spi.c)
+endif()
+
 target_sources(board PRIVATE ${SRCS})

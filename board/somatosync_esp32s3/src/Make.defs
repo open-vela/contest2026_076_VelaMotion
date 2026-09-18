@@ -24,5 +24,9 @@ ifeq ($(CONFIG_SOMATOSYNC_W5500),y)
 CSRCS += somatosync_board_eth.c
 endif
 
+ifeq ($(CONFIG_ESP32S3_SPI),y)
+CSRCS += somatosync_board_spi.c
+endif
+
 DEPPATH += --dep-path board
 VPATH += :board
