@@ -1,0 +1,121 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+# contest2026_076_VelaMotion / board/somatosync_esp32s3/Kconfig
+#
+# Sourced through CONFIG_ARCH_BOARD_CUSTOM_DIR, mirroring the upstream
+# vendor_espressif board layout (boards/esp32s3/esp32s3-eye).
+#
+
+if ARCH_BOARD_CUSTOM
+
+choice SOMATOSYNC_BOARD_VARIANT
+	prompt "SomatoSync board variant"
+	default SOMATOSYNC_BOARD_GATEWAY
+
+config SOMATOSYNC_BOARD_GATEWAY
+	bool "Gateway (W5500 + PN5180 + OLED + microSD)"
+
+config SOMATOSYNC_BOARD_NODE
+	bool "Wearable sensor node (dual ICM-42688 + OLED + DRV2605)"
+
+endchoice
+
+config SOMATOSYNC_BOARD_TAG
+	string "Board tag"
+	default "somatosync_gateway" if SOMATOSYNC_BOARD_GATEWAY
+	default "somatosync_node" if SOMATOSYNC_BOARD_NODE
+
+config SOMATOSYNC_OLED
+	bool "Enable SSD1306 128x64 OLED"
+	default y
+	select I2C
+	select I2C_DRIVER
+	select LCD
+	select LCD_DEV
+	select LCD_FRAMEBUFFER
+	---help---
+		Enable the on-board 128x64 monochrome OLED driven over I2C0.
+		This is the graphics capability landing point for the entry:
+		the panel is exposed both as a NuttX LCD device (/dev/lcd0) and,
+		through LCD_FRAMEBUFFER, as a standard framebuffer, so LVGL and
+		fb-based demos run on this board unmodified.
+
+config SOMATOSYNC_W5500
+	bool "Enable WIZnet W5500 Ethernet"
+	default y
+	depends on SOMATOSYNC_BOARD_GATEWAY
+	select SPI
+	select SPI_EXCHANGE
+	---help---
+		Enable the W5500 SPI Ethernet controller used to forward the
+		synchronised body-sensor frames to the ROS 2 host. The protocol
+		driver is the mainline NuttX one (CONFIG_NET_W5500); this option
+		only gates the board glue.
+
+if SOMATOSYNC_W5500
+
+config SOMATOSYNC_W5500_SPI
+	int "SPI port number for the W5500"
+	default 2
+	range 2 3
+	---help---
+		ESP32-S3 SPI peripheral index. The gateway wires the W5500 to SPI2
+		(MOSI 11 / MISO 12 / SCLK 13 / CS 14).
+
+config SOMATOSYNC_W5500_SPI_FREQUENCY
+	int "SPI frequency for the W5500"
+	default 20000000
+
+endif # SOMATOSYNC_W5500
+
+config SOMATOSYNC_SDCARD
+	bool "Enable microSD in 1-bit SDMMC mode"
+	default y
+	depends on SOMATOSYNC_BOARD_GATEWAY
+	select MMCSD
+	select SDIO_WIDTH_D1_ONLY
+	select FS_FAT
+	select FAT_LFN
+	---help---
+		Raw motion-capture logging backend; mounted at /mnt. D3 is held
+		high so the card never drops into SPI mode.
+
+config SOMATOSYNC_NFC
+	bool "Enable NXP PN5180 NFC frontend (board glue only)"
+	default n
+	depends on SOMATOSYNC_BOARD_GATEWAY
+	select SPI
+	---help---
+		NFC tap-to-provision. Only the board glue (SPI3 + BUSY/RST pins)
+		is in scope for the porting baseline; the PN5180 protocol driver
+		from the original firmware is follow-up work.
+
+config SOMATOSYNC_WIFI
+	bool "Enable Wi-Fi (ESP-NOW TDMA transport)"
+	default y
+	select ESP32S3_WIFI
+	select DRIVERS_IEEE80211
+	select DRIVERS_WIRELESS
+	select WIRELESS
+	select WIRELESS_WAPI
+	select NETDEV_WIRELESS_IOCTL
+	---help---
+		ESP-NOW is the collision-free TDMA transport of the SomatoSync
+		body sensor network; it rides on the esp32s3 Wi-Fi radio.
+
+config SOMATOSYNC_IMU
+	bool "Enable dual ICM-42688 IMUs"
+	default n
+	depends on SOMATOSYNC_BOARD_NODE
+	select SPI
+	select SPI_EXCHANGE
+	select SENSORS
+	---help---
+		Two independent SPI IMU buses (SPI2 IMU-A, SPI3 IMU-B) feeding the
+		on-device dual-ESKF attitude fusion. Sensor registration is
+		disabled by default: confirm whether drivers/sensors/ in your
+		checkout already provides an ICM-42688 driver before enabling.
+
+endif # ARCH_BOARD_CUSTOM

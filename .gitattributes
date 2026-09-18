@@ -1,0 +1,21 @@
+# contest2026_076_VelaMotion / .gitattributes
+#
+# openvela 的构建树跑在 Linux 上；Makefile / Kconfig / defconfig / CMake /
+# shell 脚本里出现 CRLF 会直接让构建失败。这里强制工作区使用 LF，
+# 使 Windows 上的 checkout 也能被 WSL 或 Git Bash 直接编译。
+
+* text=auto eol=lf
+
+# 二进制资源 —— 不做换行归一化
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.docx  binary
+*.pptx  binary
+*.xlsx  binary
+*.bin   binary
+*.elf   binary
+*.hex   binary

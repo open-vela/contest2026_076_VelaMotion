@@ -1,0 +1,28 @@
+############################################################################
+# contest2026_076_VelaMotion/board/somatosync_esp32s3/src/Make.defs
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# Makefile-fragment build wiring. openvela's build.sh drives CMake, so this
+# file only matters for the legacy Make build path; it is kept in step with
+# src/CMakeLists.txt.
+############################################################################
+
+include $(TOPDIR)/Make.defs
+
+CSRCS = somatosync_boot.c somatosync_bringup.c
+
+ifeq ($(CONFIG_BOARDCTL),y)
+CSRCS += somatosync_appinit.c
+endif
+
+ifeq ($(CONFIG_SOMATOSYNC_OLED),y)
+CSRCS += somatosync_board_lcd.c
+endif
+
+ifeq ($(CONFIG_SOMATOSYNC_W5500),y)
+CSRCS += somatosync_board_eth.c
+endif
+
+DEPPATH += --dep-path board
+VPATH += :board

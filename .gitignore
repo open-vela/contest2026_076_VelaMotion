@@ -1,0 +1,42 @@
+# ============================================================
+# contest2026_076_VelaMotion / .gitignore
+#
+# 忽略编译产物与本地临时文件，避免误提交到参赛仓。
+#
+# 注意：logs/ 下最终导出的 AI Coding 日志必须提交，不要忽略！
+# ============================================================
+
+# Build artifacts
+build/
+out/
+*.o
+*.a
+*.elf
+*.hex
+*.map
+*.bin
+*.lst
+*.su
+*.d
+
+# NuttX / openvela in-tree build leftovers
+.config
+.config.old
+defconfig.tmp
+nuttx/
+include/config/
+include/generated/
+
+# Editor / tooling
+.vscode/
+.idea/
+*.swp
+*~
+.cache/
+compile_commands.json
+.cproject
+.project
+
+# Local scratch
+*.log
+*.tmp

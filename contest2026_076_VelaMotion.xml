@@ -5,12 +5,29 @@
     (openvela.xml in this same repo) and adds this team repo as a self-ref
     project, exposing its work-form subdirectories to openvela working-tree
     locations via <linkfile>. remote/default come from the included openvela.xml.
+
+    contest2026_076_VelaMotion — VelaMotion / SomatoSync
+
+    Work form: BOARD PORTING (新硬件平台适配).
+    Only the board/ subdirectory is used; the unused app/ and quickapp/
+    scaffolds have been dropped.
   -->
   <include name="openvela.xml"/>
 
   <project path="contest2026_076_VelaMotion" name="contest2026_076_VelaMotion">
-    <linkfile src="app/hello_app" dest="packages/demos/contest2026_076_hello_app"/>
-    <linkfile src="quickapp/hello_quickapp" dest="packages/apps/contest2026_076_hello_quickapp"/>
-    <linkfile src="board/contest_board" dest="vendor/openvela/boards/contest2026_076_board"/>
+    <!--
+      SomatoSync custom ESP32-S3 boards (gateway + wearable node).
+
+      dest must sit under the espressif chip vendor tree, NOT under
+      vendor/openvela/boards/: the esp32s3 board layer is located through
+      CONFIG_ARCH_BOARD_CUSTOM_DIR and must live alongside its chip support,
+      exactly like the upstream reference board
+      vendor/espressif/boards/esp32s3/esp32s3-eye.
+
+      Matching defconfig entries:
+        CONFIG_ARCH_BOARD_CUSTOM_DIR="../vendor/espressif/boards/esp32s3/somatosync_esp32s3"
+        CONFIG_ARCH_BOARD_CUSTOM_NAME="somatosync_esp32s3"
+    -->
+    <linkfile src="board/somatosync_esp32s3" dest="vendor/espressif/boards/esp32s3/somatosync_esp32s3"/>
   </project>
 </manifest>
