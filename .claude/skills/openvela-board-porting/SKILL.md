@@ -109,6 +109,19 @@ cd <openvela 工作区根>
 注意分支依赖：芯片层依赖往往只在特定分支（如 `dev-ai-contest-2026`）齐备，
 `trunk` / `dev` 可能**编译不过**，这不是你的代码问题。
 
+**首次编译前务必先做这四件事**（否则会出现「看起来能跑其实什么都没编」和
+一类链接错误，实测踩过，详见 `references/esp32s3-porting-checklist.md` 第八节）：
+
+1. **显式把目标工具链加进 PATH**。`build.sh` 不 source `envsetup.sh`，
+   而 `envsetup.sh` 里的通用 glob 也匹配不到 `xtensa-esp32s3-elf` 这种名字。
+   不加的后果是 `make` 空转不报错 —— 用
+   `find nuttx -name "*.o" -newermt "-3 minutes" | wc -l` 验证是否为 0。
+2. **板目录放好 `scripts/Make.defs`**，否则 `configure.sh` 直接中止。
+3. **克隆完成后手工打 esp-hal-3rdparty 的 patch**（上游文档称会自动应用，是错的）；
+   每次切换板型都要重打。
+4. **确认 `CONFIG_TLS_TASK_NELEM > 0`**（开了 Wi-Fi 就必须有），
+   以及板级提供了 `esp32s3_spi<N>_status()`。
+
 ### 第 8 步：烧录与验证
 
 按芯片的启动方案烧录，然后**逐外设验证**，不要只看「能启动」：
@@ -130,6 +143,11 @@ nsh> i2c dev 0x03 <addr>   # I2C 器件是否 ACK
 - [ ] 每个驱动的注册函数都在 `nuttx/` 里核对过签名
 - [ ] `defconfig` 用 `make menuconfig` + `make savedefconfig` 回写，与实际构建一致
 - [ ] 单个外设失败不会导致整板起不来
+- [ ] 目标工具链已显式加入 PATH，且 `find nuttx -name "*.o" -newermt "-3 minutes" | wc -l` 不为 0
+- [ ] 板目录含 `scripts/Make.defs`，`configure.sh` 能走完
+- [ ] esp-hal-3rdparty patch 已应用（切板型后已重打）
+- [ ] 开了 Wi-Fi 时 `CONFIG_TLS_TASK_NELEM > 0`
+- [ ] 板级提供 `esp32s3_spi<N>_status()`（否则链接失败）
 - [ ] 板级 README 含编译 / 烧录 / 逐外设验证 / 已知限制
 
 ## 参考
