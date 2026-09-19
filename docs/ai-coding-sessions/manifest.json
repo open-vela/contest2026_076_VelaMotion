@@ -1,0 +1,1048 @@
+{
+  "generated": "2026-09-19T13:10:30.580445+08:00",
+  "source_root": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage",
+  "note": "原始文件逐字节复制，未修改内容。轮数/模型/token 由快照与增量补丁（含整条追加）聚合得出。",
+  "sessions": [
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "ESP32-S3引脚分配图与菜单设计",
+      "session_id": "8bd284ca-d72e-4cef-81f6-13f754b90965",
+      "created": "2026-08-12T14:54:45.350000+08:00",
+      "requests": 62,
+      "models": [
+        "deepseek-v4-flash",
+        "deepseek/deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 22273303,
+      "completion_tokens": 915422,
+      "log_lines": 185,
+      "patch_lines": 144,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\8bd284ca-d72e-4cef-81f6-13f754b90965.jsonl",
+      "source_bytes": 14533585,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-08-12__8bd284ca__ESP32-S3引脚分配图与菜单设计.jsonl",
+      "sha256": "c2f754f8c680eac476f15a9a1c4e4651cc7ebff938eaa1e9e31110318eb193b6",
+      "first_prompts": [
+        "网关修改一下引脚，并且移植U8G2做一个0.96寸OLED屏幕的菜单，添加五个低电平触发的按键为你生成了一份直观的 ESP32-S3-ETH 开发板引脚分配图，包含开发板整体双排针映射图以及各模块的接线框图。 ### 1. 开发板双排针引脚映射图 (Pinout Diagram) **功能****引脚 (开发板)****ESP32-S3 GPIO****功能 (PN5180)**[USB-C][BOOT] [RST]**Power** (Red)Pin40 [VBUS]Pin39 [VSYS]Pin38 [GND]Pin37 [3V3_EN]Pin36 [3V3]Pin35GPIO21**[KEY 5]**Pin34GPIO17**[KEY 3]**Pin33GNDPin32GPIO16**[KEY 2]**Pin31GPIO18**[KEY 4]**Pin30 [CHIP_UP]Pin29GPIO15**[KEY 1]**Pin28GNDPin27GPIO3Pin26GPIO2**[I2C_SCL]**Pin25GPIO1**[I2C_SDA]**Pin24GPIO0Pin23GNDPin22GPIO43**[UART_TX]**Pin21GPIO44**[UART_RX]****GPIO** (Green)Pin1GPIO20(USB D+)Pin2GPIO19(USB D-)Pin3GND**Pin4****GPIO48****[PN5180_IRQ]** $\\leftarrow$ *(新添加)*Pin5GPIO47$\\rightarrow$ PN5180_RSTPin6GPIO46Pin7GPIO45Pin8GND$\\rightarrow$ PN5180_GND**Pin9****GPIO42**$\\leftarrow$ **PN5180_SCK****Pin10****GPIO41**$\\rightarrow$ **PN5180_MISO****Pin11****GPIO40**$\\rightarrow$ **PN5180_MOSI**Pin12GPIO39$\\rightarrow$ PN5180_NSS(CS)Pin13GNDPin14GPIO38$\\leftarrow$ PN5180_BUSY**PSRAM reserved**Pin15-20GPIO33-37[🚫 PSRAM 占用] ### 2. 外设模块详细连接拓扑图 #### 📡 PN5180 NFC 模块（全位于右侧排针） **ESP32-S3-ETH (右排针)********PN5180 模块**Pin 36 [3V3]$\\rightarrow$VCCPin 8 [GND]$\\rightarrow$GND**Pin 4 [IO48]**$\\leftarrow$**IRQ** *(新添加)*Pin 12 [IO39]$\\rightarrow$NSS / CS**Pin 11 [IO40]**$\\rightarrow$**MOSI** / SDA**Pin 10 [IO41]**$\\leftarrow$**MISO****Pin 9 [IO42]**$\\leftarrow$**SCK** / CLKPin 14 [IO38]$\\leftarrow$BUSYPin 5 [IO47]$\\rightarrow$RST #### 🖥️ I2C 显示屏（ OLED / LCD ） *(保持不变)* **ESP32-S3-ETH (左排针)********I2C 屏幕**Pin 36 [3V3]$\\rightarrow$VCCPin 38 [GND]$\\rightarrow$GNDPin 25 [IO1]$\\rightarrow$SDAPin 26 [IO2]\\rightarrow$SCL #### 🔘 5 个独立按键（低电平有效，代码开内部上拉） *(保持不变)* **ESP32-S3-ETH (左排针)********按键模块 (接地触发)**Pin 29 [IO15]$\\rightarrow$[ KEY 1 ] $\\rightarrow$ GNDPin 32 [IO16]$\\rightarrow$[ KEY 2 ] $\\rightarrow$ GNDPin 34 [IO17]$\\rightarrow$[ KEY 3 ] $\\rightarrow$ GNDPin 31 [IO18]$\\rightarrow$[ KEY 4 ] $\\rightarrow$ GNDPin 35 [IO21]$\\rightarrow$[ KEY 5 ] $\\rightarrow$ GND ###",
+        "@agent Continue: \"Continue to iterate?\"",
+        "按键控制中，按键一是上按键，按键五是下按键，按键二右按键，按键三是中按键，按键4是左按键"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "项目检查请求",
+      "session_id": "2522638b-0fd5-4c68-9a48-b1d4b850c16d",
+      "created": "2026-08-10T10:09:31.535000+08:00",
+      "requests": 41,
+      "models": [
+        "deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 30923912,
+      "completion_tokens": 1065736,
+      "log_lines": 882,
+      "patch_lines": 702,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\2522638b-0fd5-4c68-9a48-b1d4b850c16d.jsonl",
+      "source_bytes": 8718856,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-08-10__2522638b__项目检查请求.jsonl",
+      "sha256": "a9fed4fce91cede4bb3dc87349940b2957e180b7ec72d6c3d0d260a9f71c631f",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync",
+      "title": "项目分析",
+      "session_id": "e8367073-f867-4176-bc0d-1c383b27fa2b",
+      "created": "2026-06-29T14:02:59.265000+08:00",
+      "requests": 28,
+      "models": [
+        "mimo-v2.5-pro"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 19577902,
+      "completion_tokens": 445119,
+      "log_lines": 633,
+      "patch_lines": 462,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\65dfa5cefc6682ae4c744a0a91d655ad\\chatSessions\\e8367073-f867-4176-bc0d-1c383b27fa2b.jsonl",
+      "source_bytes": 8504205,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync/2026-06-29__e8367073__项目分析.jsonl",
+      "sha256": "45c69d7d41b935fd097bc4cca4a76b15e26b58444fe1b35ef8995bf059b7fe51",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "项目审查请求",
+      "session_id": "eb00eb04-d9c0-492e-9b29-2902fe58ab0d",
+      "created": "2026-07-27T09:15:43.826000+08:00",
+      "requests": 32,
+      "models": [
+        "glm-5.2"
+      ],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 22999845,
+      "completion_tokens": 371857,
+      "log_lines": 792,
+      "patch_lines": 620,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\eb00eb04-d9c0-492e-9b29-2902fe58ab0d.jsonl",
+      "source_bytes": 5202092,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-27__eb00eb04__项目审查请求.jsonl",
+      "sha256": "726da800e144600dadf7555f2ef5b45eafb480e76145ddd251b33d16bb3e49b3",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "已派生: 项目审查请求",
+      "session_id": "0e4d0ad7-5f7e-4e0c-a465-9fae3f82b34d",
+      "created": "2026-07-27T17:22:19.840000+08:00",
+      "requests": 25,
+      "models": [
+        "glm/glm-5.2",
+        "glm-5.2"
+      ],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 3861257,
+      "completion_tokens": 84111,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\0e4d0ad7-5f7e-4e0c-a465-9fae3f82b34d.jsonl",
+      "source_bytes": 3507178,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-27__0e4d0ad7__已派生__项目审查请求.jsonl",
+      "sha256": "35c4421728ebe51c8d55f3d8769ac528742ecfb95e5294238a316b0a5414f42f",
+      "first_prompts": [
+        "你审查一下这个项目",
+        "3. gateway_fsm.c — 掉线检测无条件跳回 REGISTERING 状态 先修复一下严重问题3，前两个问题再展开讲一下",
+        "修复一下问题二，问题一改动有点大，给我写一个修复文档"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace/apps/node_app",
+      "title": "开机死锁与中断分析",
+      "session_id": "d45ddaec-e48c-4e23-b356-c08a68f13b0e",
+      "created": "2026-06-28T20:19:11.747000+08:00",
+      "requests": 6,
+      "models": [
+        "mimo-v2.5-pro"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 2295202,
+      "completion_tokens": 156573,
+      "log_lines": 171,
+      "patch_lines": 120,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\143dd7139cd44d25f95440cc969f8244\\chatSessions\\d45ddaec-e48c-4e23-b356-c08a68f13b0e.jsonl",
+      "source_bytes": 3324855,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace_apps_node_app/2026-06-28__d45ddaec__开机死锁与中断分析.jsonl",
+      "sha256": "30591c4b4a906bd9ee869f379cff4f2d7550c08cdaaf596e14cff4a1960b076d",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "rviz2 默认添加 urdf 模型",
+      "session_id": "bfe37ffe-55ec-43e6-98b3-8201e703b2b2",
+      "created": "2026-08-12T11:38:08.783000+08:00",
+      "requests": 10,
+      "models": [
+        "deepseek/deepseek-v4-flash",
+        "deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 3256344,
+      "completion_tokens": 225932,
+      "log_lines": 206,
+      "patch_lines": 159,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\bfe37ffe-55ec-43e6-98b3-8201e703b2b2.jsonl",
+      "source_bytes": 2425637,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-08-12__bfe37ffe__rviz2_默认添加_urdf_模型.jsonl",
+      "sha256": "b75667cd7d0e3dd5c978c5be3d4c0fd7e8f4725a4a86b30279837f222bcb36ba",
+      "first_prompts": [
+        "能不能在rviz2启动的时候在里面默认添加urdf模型"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "PN5180初始化失败原因",
+      "session_id": "64a31eff-e732-4433-b504-572c4049f28b",
+      "created": "2026-08-12T15:33:23.043000+08:00",
+      "requests": 4,
+      "models": [
+        "deepseek/deepseek-v4-flash",
+        "deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 3031187,
+      "completion_tokens": 652124,
+      "log_lines": 130,
+      "patch_lines": 101,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\64a31eff-e732-4433-b504-572c4049f28b.jsonl",
+      "source_bytes": 2365808,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-08-12__64a31eff__PN5180初始化失败原因.jsonl",
+      "sha256": "e693f2d91cd7557d486410b9395d0fc64e5ff4b231319f1d775a393329c3c2f8",
+      "first_prompts": [
+        "I (329) esp_image: segment 4: paddr=00140bd8 vaddr=4037eb3c sizeI (810) wifi:mode : sta (28:84:85:52:c4:0c) I (811) wifi:enable tsf I (812) esp_tdma_mac: Wi-Fi initialized in STA mode by esp_tdma_mac component I (814) ESPNOW: espnow [version: 2.0] init I (817) esp_tdma_mac: ESP-NOW initialized by esp_tdma_mac component I (823) gateway_fsm: [FSM] 状态转移成功: 0 ---> 1 I (828) nfc_pn5180: Generated Session Beacon CMAC Key: I (832) nfc_pn5180: 09 1b bb 58 78 bf 7d 04 a8 60 14 2f bd 8e 10 83 I (833) esp_tdma_mac: Beacon alive: seq=0 state=1 I (843) esp_tdma_mac: Master beacon CMAC key loaded. E (1551) PN5180: PN5180 wait for busy after transfer timeout waiting for busy level 1 E (1551) PN5180: Failed to read register 0x02 E (1552) PN5180: Failed to read IRQ_STATUS register E (1556) PN5180: Failed to boot after reset (IDLE IRQ not set), attempts=1 E (2276) PN5180: PN5180 wait for busy after transfer timeout waiting for busy level 1 E (2276) PN5180: Failed to read register 0x02 E (2277) PN5180: Failed to read IRQ_STATUS register E (2281) PN5180: Failed to boot after reset (IDLE IRQ not set), attempts=2 E (2288) PN5180: Failed to reset PN5180 during init E (2292) nfc_pn5180: Failed to init PN5180 device I (2297) ai_analyzer: DNS fallback configured: 223.5.5.5 I (2302) ai_analyzer: AI Analyzer task started (interval: 5 min, enabled: 1) I (2305) ai_analyzer: AI config UDP listening on :8888 (cmd: AI_CFG:<key>=<value>) I (2307) ai_analyzer: Report HTTP server started: http://<gateway-ip>:8080/sd/reports/latest.md I (2325) ai_analyzer: AI Analyzer initialized I (2632) oled_ui: OLED UI ready (SSD1306 128x64 @ I2C0 SDA=1 SCL=2 0x78, 5-way UP=15 RIGHT=16 OK=17 LEFT=18 DOWN=21) I (2634) gateway_main: Mocap Gateway initialization complete. Running Master TDMA daemon... I这是什么原因"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "检查算法和技术细节脱敏",
+      "session_id": "2f32bcf9-9d91-4930-91d8-7f415e6bd2a9",
+      "created": "2026-08-19T14:48:27.323000+08:00",
+      "requests": 8,
+      "models": [
+        "deepseek/deepseek-v4-flash",
+        "deepseek-v4-flash",
+        "deepseek-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 2309098,
+      "completion_tokens": 147813,
+      "log_lines": 166,
+      "patch_lines": 128,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\2f32bcf9-9d91-4930-91d8-7f415e6bd2a9.jsonl",
+      "source_bytes": 2304984,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-08-19__2f32bcf9__检查算法和技术细节脱敏.jsonl",
+      "sha256": "61a8f1d5dce5d096874a0db5038acbaa3beb92b931da0e37192f9e34e8b60104",
+      "first_prompts": [
+        "检查一下这个有什么需要脱敏的东西，比如算法以及技术细节"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace",
+      "title": "命令行创建并推送仓库",
+      "session_id": "8868d710-367a-40a0-9bbf-1806fc2c3525",
+      "created": "2026-06-29T13:24:41.887000+08:00",
+      "requests": 6,
+      "models": [
+        "mimo-v2.5-pro"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 3100090,
+      "completion_tokens": 164268,
+      "log_lines": 202,
+      "patch_lines": 154,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\d27c751104093fe77cc1e9f690383509\\chatSessions\\8868d710-367a-40a0-9bbf-1806fc2c3525.jsonl",
+      "source_bytes": 1619680,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace/2026-06-29__8868d710__命令行创建并推送仓库.jsonl",
+      "sha256": "5e25517b934952c338b20380f512636a9e80a76fbe987d65913e087bbfa3808c",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/gateway_app",
+      "title": "IP地址变化原因",
+      "session_id": "95c77b0f-527f-4443-ae8d-32ad67b5ac87",
+      "created": "2026-07-05T11:05:05.065000+08:00",
+      "requests": 7,
+      "models": [
+        "claude-haiku-4.5",
+        "claude-haiku-4-5-20251001"
+      ],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 484932,
+      "completion_tokens": 31811,
+      "log_lines": 122,
+      "patch_lines": 101,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\056948d5c366ccaaa0bf512a831d9ab6\\chatSessions\\95c77b0f-527f-4443-ae8d-32ad67b5ac87.jsonl",
+      "source_bytes": 1039604,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_gateway_app/2026-07-05__95c77b0f__IP地址变化原因.jsonl",
+      "sha256": "12de308741826d6503006b70a7cbdff78a77cf2cbf37697a19dff116f2ac1206",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "ROS2 演示使用方法",
+      "session_id": "74a8f5c4-f56c-4800-b0d5-7a12953b7e60",
+      "created": "2026-07-27T15:30:34.315000+08:00",
+      "requests": 8,
+      "models": [
+        "glm-5.2"
+      ],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 1214057,
+      "completion_tokens": 207196,
+      "log_lines": 140,
+      "patch_lines": 108,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\74a8f5c4-f56c-4800-b0d5-7a12953b7e60.jsonl",
+      "source_bytes": 1010097,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-27__74a8f5c4__ROS2_演示使用方法.jsonl",
+      "sha256": "c7fd88fe6ee76ee01a9b5acc91f80902ad20c84c73144ba5211091e006b3c11e",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "项目审查请求",
+      "session_id": "a18d06e3-7fd6-4a06-8151-b1af1a774782",
+      "created": "2026-07-26T20:17:57.315000+08:00",
+      "requests": 4,
+      "models": [
+        "glm-5.2"
+      ],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 415185,
+      "completion_tokens": 24153,
+      "log_lines": 73,
+      "patch_lines": 62,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\a18d06e3-7fd6-4a06-8151-b1af1a774782.jsonl",
+      "source_bytes": 974391,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-26__a18d06e3__项目审查请求.jsonl",
+      "sha256": "4afc11524fd33e922c81f6aa06bd8a46de6becaa0c5f3a9948065ea36c5a3ddb",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace/apps/node_app",
+      "title": "ESPNOW 组件查询",
+      "session_id": "6cc617c7-2cd6-42e9-a22e-3693037a3717",
+      "created": "2026-06-28T16:44:14.536000+08:00",
+      "requests": 4,
+      "models": [
+        "mimo-v2.5-pro"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 221140,
+      "completion_tokens": 4453,
+      "log_lines": 66,
+      "patch_lines": 48,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\143dd7139cd44d25f95440cc969f8244\\chatSessions\\6cc617c7-2cd6-42e9-a22e-3693037a3717.jsonl",
+      "source_bytes": 638175,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace_apps_node_app/2026-06-28__6cc617c7__ESPNOW_组件查询.jsonl",
+      "sha256": "60676e36cad72439cab2b4b31eecc4ec1d3cc67f6c84fb965327fbdd1f7e15db",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo/apps/gateway_app",
+      "title": "ESP32 崩溃原因分析",
+      "session_id": "679b8c9d-f6b1-47cf-acbd-365d781af7d2",
+      "created": "2026-08-12T15:14:14.363000+08:00",
+      "requests": 1,
+      "models": [
+        "deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 129269,
+      "completion_tokens": 19226,
+      "log_lines": 19,
+      "patch_lines": 14,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\80baadde6087a0b92d333d966a68d212\\chatSessions\\679b8c9d-f6b1-47cf-acbd-365d781af7d2.jsonl",
+      "source_bytes": 549211,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo_apps_gateway_app/2026-08-12__679b8c9d__ESP32_崩溃原因分析.jsonl",
+      "sha256": "9757fdb349065508fd14c0d011f3dbf23d93fe48e6ab25fcf573ad278068a13a",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "项目检查请求",
+      "session_id": "10ad75a4-663c-4913-b56e-cd2b41f85eb6",
+      "created": "2026-07-26T20:02:27.359000+08:00",
+      "requests": 1,
+      "models": [
+        "glm-5.2"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 45812,
+      "completion_tokens": 5686,
+      "log_lines": 14,
+      "patch_lines": 10,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a08756a6666a27db976b4df9c842e419\\chatSessions\\10ad75a4-663c-4913-b56e-cd2b41f85eb6.jsonl",
+      "source_bytes": 524029,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-26__10ad75a4__项目检查请求.jsonl",
+      "sha256": "722af473f798f1e9b2ac3d6371fed22385bacbc5b9f7de7420d72dfd156e3c84",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync",
+      "title": "项目分析",
+      "session_id": "31b4f127-d2e2-4b02-9b31-7c7e134544fc",
+      "created": "2026-07-26T19:19:35.945000+08:00",
+      "requests": 3,
+      "models": [
+        "mimo-v2.5-pro"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 217213,
+      "completion_tokens": 14002,
+      "log_lines": 53,
+      "patch_lines": 44,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\65dfa5cefc6682ae4c744a0a91d655ad\\chatSessions\\31b4f127-d2e2-4b02-9b31-7c7e134544fc.jsonl",
+      "source_bytes": 472887,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync/2026-07-26__31b4f127__项目分析.jsonl",
+      "sha256": "16b4a316fef2defc823200ca8f24b302f75d46c537724b3e6efb5636cec5b8a2",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "项目审查请求",
+      "session_id": "e45f3c1c-448d-4de1-b11b-944ff1526702",
+      "created": "2026-07-26T20:08:08.208000+08:00",
+      "requests": 1,
+      "models": [
+        "glm/glm-5.2",
+        "glm-5.2"
+      ],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 41033,
+      "completion_tokens": 3756,
+      "log_lines": 11,
+      "patch_lines": 9,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a08756a6666a27db976b4df9c842e419\\chatSessions\\e45f3c1c-448d-4de1-b11b-944ff1526702.jsonl",
+      "source_bytes": 398869,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-26__e45f3c1c__项目审查请求.jsonl",
+      "sha256": "8715a63f0dad572655ca41a6c91c1a5808808294599241c7acef588d3515187d",
+      "first_prompts": [
+        "你看一下这个项目"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Demo",
+      "title": "三创赛企划书撰写",
+      "session_id": "694b46c2-c320-4f83-b143-995ae8132f91",
+      "created": "2026-08-20T13:30:24.351000+08:00",
+      "requests": 1,
+      "models": [
+        "deepseek/deepseek-v4-flash",
+        "deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 94857,
+      "completion_tokens": 12696,
+      "log_lines": 15,
+      "patch_lines": 11,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\1f925ad2f9e2e39c2300ddae60c2f8b8\\chatSessions\\694b46c2-c320-4f83-b143-995ae8132f91.jsonl",
+      "source_bytes": 269969,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Demo/2026-08-20__694b46c2__三创赛企划书撰写.jsonl",
+      "sha256": "c156cf6692e3eca1d6722b5e3ba7d6a1befd70ef7fb4374c687fc3dcc897e681",
+      "first_prompts": [
+        "帮我以这个项目为基础写一个三创赛的企划书"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "三子棋人机对弈系统",
+      "session_id": "18f370aa-5104-4dbf-b4be-271e3ccf525e",
+      "created": "2026-09-14T11:50:13.403000+08:00",
+      "requests": 2,
+      "models": [
+        "deepseek-v4-flash",
+        "deepseek/deepseek-v4-flash"
+      ],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 114269,
+      "completion_tokens": 3245,
+      "log_lines": 12,
+      "patch_lines": 9,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\18f370aa-5104-4dbf-b4be-271e3ccf525e.jsonl",
+      "source_bytes": 168502,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-09-14__18f370aa__三子棋人机对弈系统.jsonl",
+      "sha256": "56aa368c8fb4f0eba3cb16ee8ca25d93db9c7910e66fa0c1ea23cebee7af0beb",
+      "first_prompts": [
+        "**2. ****三子棋人机对弈装置** 时间：2024年 技术栈：STM32F407VGT6、K230 AI芯片、OpenCV、Minimax算法、USART通信、Core XY结构 项目描述： 基于STM32F407VGT6主控芯片开发人机对弈系统，集成K230 AI芯片进行图像处理 采用OpenCV实现棋盘识别与棋子状态检测，开发Minimax算法结合Alpha-Beta剪枝技术实现智能决策 设计Core XY结构步进电机控制系统，通过USART协议实现精准的棋子放置操作 个人贡献：负责视觉识别模块程序开发、电机控制模块开发及系统调试优化 成果：系统响应时间<500ms，识别准确率>95%，决策正确率>90%按照以上格式总结这个物联网设计大赛项目"
+      ]
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/gateway_app",
+      "title": "ESP-NOW 和 TDMA 初始化状态",
+      "session_id": "d813938a-e007-44af-903d-5eec08bdc878",
+      "created": "2026-07-26T15:34:33.217000+08:00",
+      "requests": 2,
+      "models": [
+        "mimo-v2.5"
+      ],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 57536,
+      "completion_tokens": 2399,
+      "log_lines": 24,
+      "patch_lines": 19,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\056948d5c366ccaaa0bf512a831d9ab6\\chatSessions\\d813938a-e007-44af-903d-5eec08bdc878.jsonl",
+      "source_bytes": 149317,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_gateway_app/2026-07-26__d813938a__ESP-NOW_和_TDMA_初始化状态.jsonl",
+      "sha256": "07bc7a9f4498c85dd3b27527d5f20d62c98d4c3c0dd91260b22f2a422861b78d",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/gateway_app",
+      "title": "烧录失败原因分析",
+      "session_id": "5fb846d6-ce6a-4ccc-8da0-e84153560ae3",
+      "created": "2026-06-29T14:19:36.107000+08:00",
+      "requests": 2,
+      "models": [
+        "mimo-v2.5-pro"
+      ],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 56715,
+      "completion_tokens": 3736,
+      "log_lines": 31,
+      "patch_lines": 25,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\056948d5c366ccaaa0bf512a831d9ab6\\chatSessions\\5fb846d6-ce6a-4ccc-8da0-e84153560ae3.jsonl",
+      "source_bytes": 120205,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_gateway_app/2026-06-29__5fb846d6__烧录失败原因分析.jsonl",
+      "sha256": "9ee2275f77b5477b5de45d8f7193dfe42ad90b606403ffd80438731d6e3a9347",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Demo/apps/gateway_app",
+      "title": "(无标题)",
+      "session_id": "5394bb85-c05b-433c-a56c-e47bd2dd579f",
+      "created": "2026-09-15T18:06:33.502000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "deepseek/deepseek-flash"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\08ef1d61d28176e922c88b2a5acb6707\\chatSessions\\5394bb85-c05b-433c-a56c-e47bd2dd579f.jsonl",
+      "source_bytes": 1800,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Demo_apps_gateway_app/2026-09-15__5394bb85__(无标题).jsonl",
+      "sha256": "4dfbbaed3d8741a4e486d8525541c5f6c640bcd0cd231cbac80eca17a855078b",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/gateway_app",
+      "title": "(无标题)",
+      "session_id": "53e0e550-2d24-4eb2-b717-8ca25c5649ef",
+      "created": "2026-07-26T19:19:16.568000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 3,
+      "patch_lines": 2,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\056948d5c366ccaaa0bf512a831d9ab6\\chatSessions\\53e0e550-2d24-4eb2-b717-8ca25c5649ef.jsonl",
+      "source_bytes": 1791,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_gateway_app/2026-07-26__53e0e550__(无标题).jsonl",
+      "sha256": "c9044b85482ff65c1c9d48d16558fece5d0f841aa610ba03cd1b5242aff6226c",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "(无标题)",
+      "session_id": "586f30a8-46e9-4ff3-a004-44e1fffd61aa",
+      "created": "2026-08-17T16:00:18.499000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\586f30a8-46e9-4ff3-a004-44e1fffd61aa.jsonl",
+      "source_bytes": 1662,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-08-17__586f30a8__(无标题).jsonl",
+      "sha256": "6ece1e4b12a288a6d54107b152aacc46f9c26f4c22c5eb8662716ef6dc898952",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo/apps/gateway_app",
+      "title": "(无标题)",
+      "session_id": "32778f28-36e7-4284-a3ab-b2699b2b6807",
+      "created": "2026-08-11T13:28:39.031000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "deepseek/deepseek-v4-flash"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\80baadde6087a0b92d333d966a68d212\\chatSessions\\32778f28-36e7-4284-a3ab-b2699b2b6807.jsonl",
+      "source_bytes": 1662,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo_apps_gateway_app/2026-08-11__32778f28__(无标题).jsonl",
+      "sha256": "0df7da742402406c22e40b18b40bdd75889832cc5e17d7022687557bb040f3d2",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "(无标题)",
+      "session_id": "94526c33-b9f9-46ef-9203-e0c39a32ba44",
+      "created": "2026-07-29T12:51:29.073000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\009e3422e9f54f08dd5a8d4b619b4824\\chatSessions\\94526c33-b9f9-46ef-9203-e0c39a32ba44.jsonl",
+      "source_bytes": 1523,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-29__94526c33__(无标题).jsonl",
+      "sha256": "3422319410e76284ddb6c733ae07eb6296cb35fd85245a8fee6355548b78e872",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo/docs",
+      "title": "(无标题)",
+      "session_id": "322fce88-846d-47c7-aa5c-b7ff43327c0e",
+      "created": "2026-07-27T18:03:53.990000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "glm/glm-5.2"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\338e88913911bbbc455d9e0c04cb88cc\\chatSessions\\322fce88-846d-47c7-aa5c-b7ff43327c0e.jsonl",
+      "source_bytes": 1523,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo_docs/2026-07-27__322fce88__(无标题).jsonl",
+      "sha256": "1a64005fa9902b615d151321b2c788524e4024a7503705fe2b40acd8e7675414",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "d4b73821-99ce-490a-b173-e6f3554c0dc4",
+      "created": "2026-07-15T12:48:59.561000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 2,
+      "patch_lines": 1,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\d4b73821-99ce-490a-b173-e6f3554c0dc4.jsonl",
+      "source_bytes": 1336,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-15__d4b73821__(无标题).jsonl",
+      "sha256": "f24a637368becb2e859c081cee6281b8a7cf72cd2b4e67394612462db969d507",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "ac138534-ac43-4b32-9fdc-c2d79bf8593e",
+      "created": "2026-07-16T13:50:27.089000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 2,
+      "patch_lines": 1,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\ac138534-ac43-4b32-9fdc-c2d79bf8593e.jsonl",
+      "source_bytes": 1326,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-16__ac138534__(无标题).jsonl",
+      "sha256": "c6c783dfe1a9fc5249c80f256005deda2e77b3702c6e2029dc622b088aafb773",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "403e3bed-be27-41de-958c-bd2fea773f1f",
+      "created": "2026-07-14T19:46:05.886000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\403e3bed-be27-41de-958c-bd2fea773f1f.jsonl",
+      "source_bytes": 1292,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-14__403e3bed__(无标题).jsonl",
+      "sha256": "aad2318f171c3ce067c32879072a2416c57a4844f04886cfcb42b1b4722f642a",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/docs",
+      "title": "(无标题)",
+      "session_id": "e15bfd9d-d88d-4192-91d0-2f39efcbbd9c",
+      "created": "2026-07-05T13:46:46.262000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\9f654ef91f2c294c8861b53f8f4d6d9b\\chatSessions\\e15bfd9d-d88d-4192-91d0-2f39efcbbd9c.jsonl",
+      "source_bytes": 1183,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_docs/2026-07-05__e15bfd9d__(无标题).jsonl",
+      "sha256": "4e949626701024a4647d197382e6a1e3796eafcd393b817a21f322bdc50db959",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "026c027f-5558-4599-91c7-b642fdc42255",
+      "created": "2026-07-05T10:06:25.812000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\026c027f-5558-4599-91c7-b642fdc42255.jsonl",
+      "source_bytes": 1183,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-05__026c027f__(无标题).jsonl",
+      "sha256": "4d54155f16361f38cd7babec97a828ce7c018d6fa37257e24c5d727f3c95fc6d",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "5954e9f9-779e-4acd-9808-191be5802277",
+      "created": "2026-07-05T15:16:02.511000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\5954e9f9-779e-4acd-9808-191be5802277.jsonl",
+      "source_bytes": 1183,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-05__5954e9f9__(无标题).jsonl",
+      "sha256": "5d8c204f257755f403b946a578365baad2fbda419caeed819f0eefa6efe1a09c",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "7df4e699-ff8e-4649-b68f-571a97bad055",
+      "created": "2026-07-14T10:08:23.075000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "copilot/auto"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\7df4e699-ff8e-4649-b68f-571a97bad055.jsonl",
+      "source_bytes": 1183,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-14__7df4e699__(无标题).jsonl",
+      "sha256": "234002038b4a95e2461d903a378408ea4fec13703642374dab938a140809730d",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/ESP_ICM42688",
+      "title": "(无标题)",
+      "session_id": "a39bfa6f-30a9-41a0-b98e-9775bf3384a6",
+      "created": "2026-06-28T10:20:37.792000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 2,
+      "patch_lines": 1,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\6a3d0613af3435faa621651fde083bd1\\chatSessions\\a39bfa6f-30a9-41a0-b98e-9775bf3384a6.jsonl",
+      "source_bytes": 1161,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_ESP_ICM42688/2026-06-28__a39bfa6f__(无标题).jsonl",
+      "sha256": "7c58906d8b5669e0a9703c27bac11ff803302ea7d450e172ff1a3f244ae7f0e7",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync-Monorepo",
+      "title": "(无标题)",
+      "session_id": "f5aeeb74-e324-48b8-89e4-0dd8fee63068",
+      "created": "2026-07-26T20:01:07.819000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a08756a6666a27db976b4df9c842e419\\chatSessions\\f5aeeb74-e324-48b8-89e4-0dd8fee63068.jsonl",
+      "source_bytes": 1131,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync-Monorepo/2026-07-26__f5aeeb74__(无标题).jsonl",
+      "sha256": "74d5a7fa15dc3e856978f1a5925dd0e5b2ee0bde242da8e966d1237dcaef2ced",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "cac73183-9aed-4135-9007-b345239fd16c",
+      "created": "2026-06-28T20:17:32.312000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\143dd7139cd44d25f95440cc969f8244\\chatSessions\\cac73183-9aed-4135-9007-b345239fd16c.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace_apps_node_app/2026-06-28__cac73183__(无标题).jsonl",
+      "sha256": "f7acc0c4610647b62e12012f462a846b9ac3681c92d6b060d069548c525d990a",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "f638f4f6-dea5-4f1e-9aa2-14dfa9c18c95",
+      "created": "2026-06-28T20:16:23.111000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\143dd7139cd44d25f95440cc969f8244\\chatSessions\\f638f4f6-dea5-4f1e-9aa2-14dfa9c18c95.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace_apps_node_app/2026-06-28__f638f4f6__(无标题).jsonl",
+      "sha256": "e8baab98d27aa61edb80cf3f2baf5a26d63b5835570710f5307eadf367b0b1d8",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace/apps/gateway_app",
+      "title": "(无标题)",
+      "session_id": "e7021728-3970-48ce-a64c-d306091f4a16",
+      "created": "2026-06-28T16:42:19.202000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\34305ceebe42c2e893d89730bac5ddac\\chatSessions\\e7021728-3970-48ce-a64c-d306091f4a16.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace_apps_gateway_app/2026-06-28__e7021728__(无标题).jsonl",
+      "sha256": "9e36d514b0c5f821784a75307a6aa1abd6532860b72aa181c9cecc91a57746e2",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync",
+      "title": "(无标题)",
+      "session_id": "b86c27d3-b7cf-4571-8a28-fab80769d2eb",
+      "created": "2026-06-29T14:00:29.133000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\65dfa5cefc6682ae4c744a0a91d655ad\\chatSessions\\b86c27d3-b7cf-4571-8a28-fab80769d2eb.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync/2026-06-29__b86c27d3__(无标题).jsonl",
+      "sha256": "8f23cfdbe7e27cb9bcbd17c677214b8a44ad4188ad61e073898703d1560eec3d",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "444822ff-3d8d-460c-964e-9a5b4df0c1da",
+      "created": "2026-06-29T14:20:06.369000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\444822ff-3d8d-460c-964e-9a5b4df0c1da.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-06-29__444822ff__(无标题).jsonl",
+      "sha256": "9e7a0a3f69da7b536360d8021925a0617b32e0e2ee8ca05fa65502eb03be35f7",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/apps/node_app",
+      "title": "(无标题)",
+      "session_id": "71115905-a0bb-4e03-a5ad-020ca8f2ed3a",
+      "created": "2026-07-01T16:43:50.841000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a4f8c6a6b9596015c0227be64b6cff04\\chatSessions\\71115905-a0bb-4e03-a5ad-020ca8f2ed3a.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_apps_node_app/2026-07-01__71115905__(无标题).jsonl",
+      "sha256": "978dd53182e1173228611f927c47f4a4c50ebb05bebadebebd3c0af95e921d5a",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/ESP32-S3-ETH-NOW-NFC",
+      "title": "(无标题)",
+      "session_id": "2b7546e9-5fe6-4a4d-ba81-6448d198f53f",
+      "created": "2026-06-28T10:20:49.580000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\ba23d685b244fa4339298823fb8d71dd\\chatSessions\\2b7546e9-5fe6-4a4d-ba81-6448d198f53f.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_ESP32-S3-ETH-NOW-NFC/2026-06-28__2b7546e9__(无标题).jsonl",
+      "sha256": "34cd909346e40a14b5fed3dee8628dca116c2a5871f8bfd8b2c264054d40bbf6",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace",
+      "title": "(无标题)",
+      "session_id": "06ff5a59-cc01-4ab6-9de1-9826826d6cb1",
+      "created": "2026-06-28T16:42:02.853000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\d27c751104093fe77cc1e9f690383509\\chatSessions\\06ff5a59-cc01-4ab6-9de1-9826826d6cb1.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace/2026-06-28__06ff5a59__(无标题).jsonl",
+      "sha256": "db6f62e4d44b4da3298e45ea631cbfccabd7986a354014b3f9d856ceef534de1",
+      "first_prompts": []
+    },
+    {
+      "workspace": "c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace",
+      "title": "(无标题)",
+      "session_id": "7acf9857-b815-429b-bc1a-c9bf6f5f6e11",
+      "created": "2026-06-28T12:14:41.358000+08:00",
+      "requests": 0,
+      "models": [],
+      "session_models": [
+        "mimo/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "log_lines": 1,
+      "patch_lines": 0,
+      "whole_appends": 0,
+      "source_file": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage\\d27c751104093fe77cc1e9f690383509\\chatSessions\\7acf9857-b815-429b-bc1a-c9bf6f5f6e11.jsonl",
+      "source_bytes": 1117,
+      "output_file": "sessions/c_Users_ZYS20_Desktop_SomatoSync_SomatoSync_Workspace/2026-06-28__7acf9857__(无标题).jsonl",
+      "sha256": "9b785d43100bff25bc35c09a71e6adb7b7ab682c805af5feac054eda12ff7f68",
+      "first_prompts": []
+    }
+  ],
+  "skipped": []
+}

@@ -267,6 +267,29 @@ nsh> ifconfig eth0      # 网关板：W5500
 
 ---
 
-## 七、许可协议
+## 七、提交物索引
+
+| 交付物 | 位置 |
+| --- | --- |
+| 板级适配代码 | `board/somatosync_esp32s3/` |
+| 板级适配指南（编译 / 烧录 / 逐外设验证 / 已知限制） | `board/somatosync_esp32s3/README_zh-cn.md` |
+| 作品介绍文档 | `docs/作品介绍.docx` ／ `docs/作品介绍.pdf` |
+| **演示视频**（4 分 41 秒） | `docs/演示视频.mp4` |
+| 硬件资料（原理图 / PCB） | `docs/reference/` |
+| 系统设计文档（原型背景） | `docs/design/` |
+| 提交手册 | `docs/提交操作手册.md` |
+| 可复用 Skill | `.claude/skills/openvela-board-porting/` |
+| **AI 对话记录（索引）** | `docs/ai-coding-sessions/` |
+
+> **关于 AI Coding 日志**：本项目的 AI 开发主要使用 **VS Code（GitHub Copilot Chat，
+> 含小米 MiMo 扩展）** 与 **MiMoCode（小米基于 OpenCode 的定制版）**。
+> 大赛采集器仅支持 `claude-code` / `codex` / `opencode` / `kiro` 四个适配器，
+> **不包含上述两种**，因此 `logs/` 无法自动生成。
+> 相关真实对话记录已**逐字节原样提取**，索引见
+> [docs/ai-coding-sessions/](docs/ai-coding-sessions/)，另已邮件向组委会说明并附原始记录。
+
+---
+
+## 八、许可协议
 
 Apache-2.0。参赛作品为原创，无版权、专利及其他法律纠纷。

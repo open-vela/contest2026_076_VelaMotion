@@ -1,0 +1,175 @@
+{
+  "generated": "2026-09-19T13:17:25.853982+08:00",
+  "source_host": "192.168.0.*** (zysros2, Ubuntu 22.04)",
+  "source_db": "~/.local/share/mimocode/mimocode.db",
+  "raw_snapshot": "raw/mimocode.db",
+  "note": "sessions/*.jsonl 为按会话分组的原始数据库行，data 字段原样保留；transcripts/*.md 为可读派生产物。",
+  "sessions": [
+    {
+      "session_id": "ses_0c44efe11ffegUf3Ajq5ElYqnY",
+      "title": "查看目录内容",
+      "directory": "/home/yangcong",
+      "created": "2026-07-07T16:28:03.951000+08:00",
+      "messages": 3,
+      "parts": 9,
+      "models": [
+        "mimo/mimo-auto"
+      ],
+      "prompt_tokens": 18773,
+      "completion_tokens": 492,
+      "session_jsonl": "sessions/2026-07-07__0c44efe1__查看目录内容.jsonl",
+      "transcript": "transcripts/2026-07-07__0c44efe1__查看目录内容.md"
+    },
+    {
+      "session_id": "ses_0c44efe09ffe4XdSvqoGPRPjY2",
+      "title": "Conversation title request",
+      "directory": "/home/yangcong",
+      "created": "2026-07-07T16:28:03.958000+08:00",
+      "messages": 34,
+      "parts": 117,
+      "models": [
+        "mimo/mimo-auto",
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 84172,
+      "completion_tokens": 2728,
+      "session_jsonl": "sessions/2026-07-07__0c44efe0__Conversation_title_request.jsonl",
+      "transcript": "transcripts/2026-07-07__0c44efe0__Conversation_title_request.md"
+    },
+    {
+      "session_id": "ses_0c4031baaffeogHC1RZVk2VkKx",
+      "title": "checkpoint-writer: Previous checkpoint: /home/yangcong/.local/share/mimocode/memory/sessions/ses_0c44efe09ffe4XdSvqoGPRPjY2/checkpoint.md\nPrevious memory: /home/yangcong/.local/share/mimocode/memory/projects/global/MEMORY.md\nRead BOTH the prior checkpoint (to dedupe Discovered/Dead-end titles AND to carry forward Live Resources, Execution-context frames, and Session-metadata fields that are still alive) AND the prior memory (project memory) before writing yours.",
+      "directory": "/home/yangcong",
+      "created": "2026-07-07T17:50:57.109000+08:00",
+      "messages": 17,
+      "parts": 65,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 57138,
+      "completion_tokens": 5042,
+      "session_jsonl": "sessions/2026-07-07__0c4031ba__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.jsonl",
+      "transcript": "transcripts/2026-07-07__0c4031ba__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.md"
+    },
+    {
+      "session_id": "ses_0c01c7d28ffe1pOzHA8RS5oWE3",
+      "title": "6.1内核设备树设备列表",
+      "directory": "/home/yangcong/RK3566/tspi_linux_6.1_sdk",
+      "created": "2026-07-08T12:01:42.616000+08:00",
+      "messages": 98,
+      "parts": 377,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 623321,
+      "completion_tokens": 14173,
+      "session_jsonl": "sessions/2026-07-08__0c01c7d2__6.1内核设备树设备列表.jsonl",
+      "transcript": "transcripts/2026-07-08__0c01c7d2__6.1内核设备树设备列表.md"
+    },
+    {
+      "session_id": "ses_0c01c02c4ffeH19yU4UcqUElwC",
+      "title": "checkpoint-writer: Previous checkpoint: /home/yangcong/.local/share/mimocode/memory/sessions/ses_0c01c7d28ffe1pOzHA8RS5oWE3/checkpoint.md\nPrevious memory: /home/yangcong/.local/share/mimocode/memory/projects/global/MEMORY.md\nRead BOTH the prior checkpoint (to dedupe Discovered/Dead-end titles AND to carry forward Live Resources, Execution-context frames, and Session-metadata fields that are still alive) AND the prior memory (project memory) before writing yours.",
+      "directory": "/home/yangcong/RK3566/tspi_linux_6.1_sdk",
+      "created": "2026-07-08T12:02:13.947000+08:00",
+      "messages": 19,
+      "parts": 70,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 84216,
+      "completion_tokens": 4370,
+      "session_jsonl": "sessions/2026-07-08__0c01c02c__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.jsonl",
+      "transcript": "transcripts/2026-07-08__0c01c02c__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.md"
+    },
+    {
+      "session_id": "ses_0c019c481ffe6R8UIbNUkFmmU0",
+      "title": "checkpoint-writer: Previous checkpoint: /home/yangcong/.local/share/mimocode/memory/sessions/ses_0c01c7d28ffe1pOzHA8RS5oWE3/checkpoint.md\nPrevious memory: /home/yangcong/.local/share/mimocode/memory/projects/global/MEMORY.md\nRead BOTH the prior checkpoint (to dedupe Discovered/Dead-end titles AND to carry forward Live Resources, Execution-context frames, and Session-metadata fields that are still alive) AND the prior memory (project memory) before writing yours.",
+      "directory": "/home/yangcong/RK3566/tspi_linux_6.1_sdk",
+      "created": "2026-07-08T12:04:40.958000+08:00",
+      "messages": 6,
+      "parts": 25,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 14731,
+      "completion_tokens": 2617,
+      "session_jsonl": "sessions/2026-07-08__0c019c48__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.jsonl",
+      "transcript": "transcripts/2026-07-08__0c019c48__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.md"
+    },
+    {
+      "session_id": "ses_0bfe60910ffe4ZZeE6N6na0WCi",
+      "title": "checkpoint-writer: Previous checkpoint: /home/yangcong/.local/share/mimocode/memory/sessions/ses_0c01c7d28ffe1pOzHA8RS5oWE3/checkpoint.md\nPrevious memory: /home/yangcong/.local/share/mimocode/memory/projects/global/MEMORY.md\nRead BOTH the prior checkpoint (to dedupe Discovered/Dead-end titles AND to carry forward Live Resources, Execution-context frames, and Session-metadata fields that are still alive) AND the prior memory (project memory) before writing yours.",
+      "directory": "/home/yangcong/RK3566/tspi_linux_6.1_sdk",
+      "created": "2026-07-08T13:01:11.279000+08:00",
+      "messages": 6,
+      "parts": 24,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 77056,
+      "completion_tokens": 3769,
+      "session_jsonl": "sessions/2026-07-08__0bfe6091__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.jsonl",
+      "transcript": "transcripts/2026-07-08__0bfe6091__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.md"
+    },
+    {
+      "session_id": "ses_05bfa9d72ffeK7vJoo0Ec5bYfy",
+      "title": "启动ROS软件",
+      "directory": "/home/yangcong/mocap_ws",
+      "created": "2026-07-27T22:40:44.173000+08:00",
+      "messages": 16,
+      "parts": 64,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 41656,
+      "completion_tokens": 1711,
+      "session_jsonl": "sessions/2026-07-27__05bfa9d7__启动ROS软件.jsonl",
+      "transcript": "transcripts/2026-07-27__05bfa9d7__启动ROS软件.md"
+    },
+    {
+      "session_id": "ses_05bfa9d4cffeSIvWZ8Mlm0brdB",
+      "title": "Auto Dream",
+      "directory": "/home/yangcong/mocap_ws",
+      "created": "2026-07-27T22:40:44.211000+08:00",
+      "messages": 23,
+      "parts": 115,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 49613,
+      "completion_tokens": 7393,
+      "session_jsonl": "sessions/2026-07-27__05bfa9d4__Auto_Dream.jsonl",
+      "transcript": "transcripts/2026-07-27__05bfa9d4__Auto_Dream.md"
+    },
+    {
+      "session_id": "ses_05bf44085ffevwXIvWfH9leV0t",
+      "title": "Manual dream memory consolidation",
+      "directory": "/home/yangcong/mocap_ws",
+      "created": "2026-07-27T22:47:41.178000+08:00",
+      "messages": 15,
+      "parts": 66,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 61688,
+      "completion_tokens": 2054,
+      "session_jsonl": "sessions/2026-07-27__05bf4408__Manual_dream_memory_consolidation.jsonl",
+      "transcript": "transcripts/2026-07-27__05bf4408__Manual_dream_memory_consolidation.md"
+    },
+    {
+      "session_id": "ses_05bf1de28ffevGrFbR3U3XvDzM",
+      "title": "checkpoint-writer: Previous checkpoint: /home/yangcong/.local/share/mimocode/memory/sessions/ses_05bf44085ffevwXIvWfH9leV0t/checkpoint.md\nPrevious memory: /home/yangcong/.local/share/mimocode/memory/projects/global/MEMORY.md\nRead BOTH the prior checkpoint (to dedupe Discovered/Dead-end titles AND to carry forward Live Resources, Execution-context frames, and Session-metadata fields that are still alive) AND the prior memory (project memory) before writing yours.",
+      "directory": "/home/yangcong/mocap_ws",
+      "created": "2026-07-27T22:50:17.431000+08:00",
+      "messages": 13,
+      "parts": 53,
+      "models": [
+        "xiaomi/mimo-v2.5-pro"
+      ],
+      "prompt_tokens": 59047,
+      "completion_tokens": 4405,
+      "session_jsonl": "sessions/2026-07-27__05bf1de2__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.jsonl",
+      "transcript": "transcripts/2026-07-27__05bf1de2__checkpoint-writer__Previous_checkpoint___home_yangcong_.loca.md"
+    }
+  ]
+}
