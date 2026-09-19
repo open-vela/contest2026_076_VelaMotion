@@ -19,3 +19,5 @@
 *.bin   binary
 *.elf   binary
 *.hex   binary
+*.mp4   binary
+*.mov   binary
