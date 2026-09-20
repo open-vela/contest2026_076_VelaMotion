@@ -172,6 +172,14 @@ CONFIG_NET_ETH_PKTSIZE=1514
 CONFIG_NET_ICMP_SOCKET=y
 CONFIG_NET_IPFRAG=y
 CONFIG_NET_LOOPBACK=y
+
+#
+# CONFIG_NET_LOOPBACK requires a scheduler work queue
+# (drivers/net/loopback.c:61). The gateway config happens to inherit it
+# through other options (W5500 / SDMMC), but relying on that is fragile --
+# state it explicitly so a future config edit cannot drop it silently.
+#
+CONFIG_SCHED_WORKQUEUE=y
 CONFIG_NET_TCP=y
 CONFIG_NET_TCPBACKLOG=y
 CONFIG_NET_TCP_WRITE_BUFFERS=y
