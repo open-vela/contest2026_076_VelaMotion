@@ -154,6 +154,16 @@ CONFIG_NET_ICMP_SOCKET=y
 CONFIG_NET_LOOPBACK=y
 
 #
+# CONFIG_NET_LOOPBACK requires a scheduler work queue
+# (drivers/net/loopback.c:61). The gateway config happens to inherit it
+# through other options (W5500 / SDMMC), but the node config does not --
+# without this line the node build fails with:
+#   ./net/loopback.c:61:4: error: #error Worker thread support is required
+#   (CONFIG_SCHED_WORKQUEUE)
+#
+CONFIG_SCHED_WORKQUEUE=y
+
+#
 # Filesystem, shell and diagnostics
 #
 CONFIG_FS_PROCFS=y
