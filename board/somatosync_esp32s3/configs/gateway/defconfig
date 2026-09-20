@@ -122,6 +122,17 @@ CONFIG_ESP32S3_SPI2_CSPIN=14
 CONFIG_NET_W5500=y
 
 #
+# SPI3 — NXP PN5180 NFC frontend (SCK 42 / MISO 41 / MOSI 40 / NSS 39,
+#        BUSY 38, RST 47). Bus + board glue only in this baseline; the
+#        PN5180 protocol stack is follow-up work (see README_zh-cn.md §8.3).
+#
+CONFIG_ESP32S3_SPI3=y
+CONFIG_ESP32S3_SPI3_CLKPIN=42
+CONFIG_ESP32S3_SPI3_MOSIPIN=40
+CONFIG_ESP32S3_SPI3_MISOPIN=41
+CONFIG_ESP32S3_SPI3_CSPIN=39
+
+#
 # microSD in 1-bit SDMMC mode (CLK 7 / CMD 6 / D0 5 / D3 4)
 #
 CONFIG_ESP32S3_SDMMC=y

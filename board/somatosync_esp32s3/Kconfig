@@ -79,8 +79,11 @@ config SOMATOSYNC_SDCARD
 	select FS_FAT
 	select FAT_LFN
 	---help---
-		Raw motion-capture logging backend; mounted at /mnt. D3 is held
-		high so the card never drops into SPI mode.
+		Raw motion-capture logging backend: registers the SDMMC block
+		device (/dev/mmcsd0, with the FAT partition at /dev/mmcsd1).
+		The filesystem is not mounted automatically — mount it from NSH
+		(see README_zh-cn.md §6). D3 is held high so the card never drops
+		into SPI mode.
 
 config SOMATOSYNC_NFC
 	bool "Enable NXP PN5180 NFC frontend (board glue only)"

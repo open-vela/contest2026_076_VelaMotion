@@ -82,9 +82,11 @@ static const struct ssd1306_priv_s g_oled_priv =
  * Name: board_lcd_initialize
  *
  * Description:
- *   Initialize the OLED video hardware. The initial state of the panel is
- *   fully initialized, display memory cleared and ready to use, but with the
- *   power setting at 0 (off).
+ *   Initialize the OLED video hardware and switch the panel on.
+ *
+ *   The panel is fully initialised with its display memory cleared, then
+ *   powered at CONFIG_LCD_MAXPOWER so that /dev/lcd0 is immediately usable
+ *   once NSH comes up.
  *
  * Returned Value:
  *   Zero (OK) on success; a negated errno value on failure.
