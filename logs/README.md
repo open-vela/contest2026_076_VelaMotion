@@ -19,8 +19,10 @@
 > **真实对话记录已逐字节原样提取**，见
 > [`../docs/ai-coding-sessions/`](../docs/ai-coding-sessions/)：
 >
-> - VS Code / Copilot Chat：**46** 个会话、**258** 轮，其中小米 MiMo
->   `mimo-v2.5-pro` **18** 个会话、`mimo-v2.5` **1** 个
+> - VS Code / Copilot Chat：**46** 个会话、**258** 轮。其中小米 MiMo
+>   `mimo-v2.5-pro` **6** 个会话、`mimo-v2.5` **1** 个（**有请求级证据**口径，
+>   即会话内每条请求记录的 `modelId`）；另有 11 个会话仅在 composer 中选中了
+>   MiMo 但没有任何请求记录（空会话），**不计入**
 > - MiMoCode：**11** 个会话、**250** 条消息，`xiaomi/mimo-v2.5-pro` **238** 条、
 >   `mimo/mimo-auto` **12** 条
 >

@@ -43,10 +43,17 @@
 
 #if defined(CONFIG_SOMATOSYNC_BOARD_GATEWAY)
 
-/* I2C0 — SSD1306 OLED, 7-bit address 0x3c */
+/* I2C0 — SSD1306 OLED, 7-bit address 0x3c
+ *
+ * Pin order verified against the production ESP-IDF gateway firmware
+ * (apps/gateway_app/components/oled_ui/oled_ui.c):
+ *     OLED_SDA_PIN = 1, OLED_SCL_PIN = 2
+ * An earlier revision of this file had SCL/SDA transposed, which made the
+ * panel fail to ACK on real hardware (board_lcd_initialize() -> -EIO).
+ */
 
-#define BOARD_I2C0_SCL_PIN        1
-#define BOARD_I2C0_SDA_PIN        2
+#define BOARD_I2C0_SCL_PIN        2
+#define BOARD_I2C0_SDA_PIN        1
 
 /* SPI2 — WIZnet W5500 hardwired TCP/IP controller */
 

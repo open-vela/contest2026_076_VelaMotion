@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-19T13:10:30.580445+08:00",
+  "generated": "2026-09-19T19:53:32.620144+08:00",
   "source_root": "C:\\Users\\ZYS20\\AppData\\Roaming\\Code\\User\\workspaceStorage",
   "note": "原始文件逐字节复制，未修改内容。轮数/模型/token 由快照与增量补丁（含整条追加）聚合得出。",
   "sessions": [
@@ -260,8 +260,8 @@
       "created": "2026-07-05T11:05:05.065000+08:00",
       "requests": 7,
       "models": [
-        "claude-haiku-4.5",
-        "claude-haiku-4-5-20251001"
+        "claude-haiku-4-5-20251001",
+        "claude-haiku-4.5"
       ],
       "session_models": [
         "copilot/auto"

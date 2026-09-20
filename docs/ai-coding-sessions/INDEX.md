@@ -1,28 +1,31 @@
 # AI 对话记录索引（VS Code / GitHub Copilot Chat）
 
-- 提取时间：2026-09-19 13:10
+- 提取时间：2026-09-19 19:53
 - 会话文件 **46** 个，合计 **56.1 MB**（其中 22 个含有效对话）
 - 对话轮数 **258**
 - 累计 token：输入 **116,720,158**　输出 **4,561,314**
 - 来源：`C:\Users\ZYS20\AppData\Roaming\Code\User\workspaceStorage`
 - **逐字节原样复制，未修改任何内容**
 
-## 模型使用情况（按会话数）
+## 模型使用情况（按会话数，两种口径分列）
 
-| 模型 | 出现在多少个会话 |
-| --- | --- |
-| `mimo-v2.5-pro` | 18 |
-| `deepseek-v4-flash` | 10 |
-| `glm-5.2` | 9 |
-| `auto` | 9 |
-| `deepseek-flash` | 2 |
-| `claude-haiku-4.5` | 1 |
-| `claude-haiku-4-5-20251001` | 1 |
-| `mimo-v2.5` | 1 |
+| 模型 | 有请求级证据的会话（权威） | UI 中被选中的会话 |
+| --- | --- | --- |
+| `deepseek-v4-flash` | 8 | 10 |
+| `mimo-v2.5-pro` | 6 | 18 |
+| `glm-5.2` | 6 | 8 |
+| `deepseek-flash` | 1 | 1 |
+| `claude-haiku-4-5-20251001` | 1 | 0 |
+| `mimo-v2.5` | 1 | 0 |
+| `claude-haiku-4.5` | 1 | 0 |
+| `auto` | 0 | 9 |
 
 > `mimo-v2.5-pro` 由扩展 `sdmapvstool.xiaomimimo-for-copilot` 提供（小米 MiMo）。
-> 表中「模型」列优先取**每条请求记录的 modelId**（权威）；
-> 若该会话没有请求级记录，则退化为 composer 的 `inputState.selectedModel`，并以 `*` 标注。
+
+> **两列不可混用**：左列取**每条请求记录的 modelId**，表示该模型**确实产出了回答**；
+> 右列取 composer 的 `inputState.selectedModel`，只表示下拉框选中了它。
+> 右列大于左列的部分，是**没有任何请求记录的空会话**（多为无标题会话），
+> 不应据此宣称该模型被实际使用过。
 > `copilot/auto` 表示由 Copilot 自动选择模型、未固定。
 
 > 说明：VS Code 会话文件是「快照 + 增量补丁」格式，补丁既可能整条追加请求
@@ -41,7 +44,7 @@
 | 8 | `c:/Users/ZYS20/Desktop/SomatoSync-Monorepo` | PN5180初始化失败原因 | 2026-08-12 | 4 | deepseek/deepseek-v4-flash, deepseek-v4-flash | 3,031,187 | 652,124 | 2.26 MB | `e693f2d91cd7557d` |
 | 9 | `c:/Users/ZYS20/Desktop/SomatoSync-Monorepo` | 检查算法和技术细节脱敏 | 2026-08-19 | 8 | deepseek/deepseek-v4-flash, deepseek-v4-flash, deepseek-flash | 2,309,098 | 147,813 | 2.20 MB | `61a8f1d5dce5d096` |
 | 10 | `c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace` | 命令行创建并推送仓库 | 2026-06-29 | 6 | mimo-v2.5-pro | 3,100,090 | 164,268 | 1.54 MB | `5e25517b934952c3` |
-| 11 | `c:/Users/ZYS20/Desktop/SomatoSync/apps/gateway_app` | IP地址变化原因 | 2026-07-05 | 7 | claude-haiku-4.5, claude-haiku-4-5-20251001 | 484,932 | 31,811 | 0.99 MB | `12de308741826d65` |
+| 11 | `c:/Users/ZYS20/Desktop/SomatoSync/apps/gateway_app` | IP地址变化原因 | 2026-07-05 | 7 | claude-haiku-4-5-20251001, claude-haiku-4.5 | 484,932 | 31,811 | 0.99 MB | `12de308741826d65` |
 | 12 | `c:/Users/ZYS20/Desktop/SomatoSync-Monorepo` | ROS2 演示使用方法 | 2026-07-27 | 8 | glm-5.2 | 1,214,057 | 207,196 | 0.96 MB | `c7fd88fe6ee76ee0` |
 | 13 | `c:/Users/ZYS20/Desktop/SomatoSync-Monorepo` | 项目审查请求 | 2026-07-26 | 4 | glm-5.2 | 415,185 | 24,153 | 0.93 MB | `4afc11524fd33e92` |
 | 14 | `c:/Users/ZYS20/Desktop/SomatoSync/SomatoSync_Workspace/apps/node_app` | ESPNOW 组件查询 | 2026-06-28 | 4 | mimo-v2.5-pro | 221,140 | 4,453 | 0.61 MB | `60676e36cad72439` |

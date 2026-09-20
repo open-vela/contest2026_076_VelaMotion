@@ -27,7 +27,7 @@
 | 内容 | 是否属于本次参赛作品 |
 | --- | --- |
 | `board/somatosync_esp32s3/` openvela 板级适配 | ✅ **本次参赛作品**（含 Kconfig / CMake / boot / appinit / bringup / OLED / W5500 glue / 两套 defconfig） |
-| `README.md`、`docs/作品介绍.md`、`docs/提交操作手册.md` | ✅ 本次撰写 |
+| `README.md`、`docs/技术报告.md`、`docs/提交操作手册.md` | ✅ 本次撰写 |
 | `docs/reference/` 原理图与 PCB 图 | 本队自研硬件资料（引脚映射复核依据） |
 | `docs/design/` 本目录 | 原型系统背景文档 |
 | 原型工程仓的 ESP-IDF 固件与 ROS 2 上位机 | ❌ **不在本仓**，仅作溯源链接 |
