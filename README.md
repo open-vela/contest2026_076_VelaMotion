@@ -275,6 +275,8 @@ nsh> ifconfig eth0      # 网关板：W5500
 | 板级适配指南（编译 / 烧录 / 逐外设验证 / 已知限制） | `board/somatosync_esp32s3/README_zh-cn.md` |
 | 技术报告文档 | `docs/技术报告.docx` ／ `docs/技术报告.pdf` |
 | **演示视频**（4 分 41 秒） | `docs/演示视频.mp4` |
+| **作品展示照片**（目标硬件多角度 + 系统实机运行） | `docs/作品展示照片/` |
+| **大赛开发板发放凭证**（组委会发放的 ESP32-P4X 实物照） | `docs/大赛开发板发放凭证/` |
 | 硬件资料（原理图 / PCB） | `docs/reference/` |
 | 系统设计文档（原型背景） | `docs/design/` |
 | 提交手册 | `docs/提交操作手册.md` |
