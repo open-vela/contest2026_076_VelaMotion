@@ -306,10 +306,17 @@ def main() -> int:
     tot_in = sum(e["prompt_tokens"] for e in entries)
     tot_out = sum(e["completion_tokens"] for e in entries)
 
-    per_model = {}
+    # 两种口径必须分开统计：把二者取并集会高估
+    #   models         = 每条请求记录里的 modelId，说明该模型**确实产出了回答**（权威）
+    #   session_models = composer 的 inputState.selectedModel，只说明下拉框选了它；
+    #                    有些会话（多为无标题的空会话）没有任何请求记录。
+    per_model_req: dict[str, set] = {}
+    per_model_sel: dict[str, set] = {}
     for e in entries:
-        for m in set(e["models"]) | set(e["session_models"]):
-            per_model.setdefault(m.split("/")[-1], set()).add(e["session_id"])
+        for m in set(e["models"]):
+            per_model_req.setdefault(m.split("/")[-1], set()).add(e["session_id"])
+        for m in set(e["session_models"]):
+            per_model_sel.setdefault(m.split("/")[-1], set()).add(e["session_id"])
 
     L = [
         "# AI 对话记录索引（VS Code / GitHub Copilot Chat）",
@@ -321,19 +328,24 @@ def main() -> int:
         f"- 来源：`{STORAGE}`",
         "- **逐字节原样复制，未修改任何内容**",
         "",
-        "## 模型使用情况（按会话数）",
+        "## 模型使用情况（按会话数，两种口径分列）",
         "",
-        "| 模型 | 出现在多少个会话 |",
-        "| --- | --- |",
+        "| 模型 | 有请求级证据的会话（权威） | UI 中被选中的会话 |",
+        "| --- | --- | --- |",
     ]
-    for m, s in sorted(per_model.items(), key=lambda x: -len(x[1])):
-        L.append(f"| `{m}` | {len(s)} |")
+    all_models = set(per_model_req) | set(per_model_sel)
+    for m in sorted(all_models,
+                    key=lambda x: (-len(per_model_req.get(x, ())), -len(per_model_sel.get(x, ())))):
+        L.append(f"| `{m}` | {len(per_model_req.get(m, ()))} | {len(per_model_sel.get(m, ()))} |")
 
     L += [
         "",
         "> `mimo-v2.5-pro` 由扩展 `sdmapvstool.xiaomimimo-for-copilot` 提供（小米 MiMo）。",
-        "> 表中「模型」列优先取**每条请求记录的 modelId**（权威）；",
-        "> 若该会话没有请求级记录，则退化为 composer 的 `inputState.selectedModel`，并以 `*` 标注。",
+        "",
+        "> **两列不可混用**：左列取**每条请求记录的 modelId**，表示该模型**确实产出了回答**；",
+        "> 右列取 composer 的 `inputState.selectedModel`，只表示下拉框选中了它。",
+        "> 右列大于左列的部分，是**没有任何请求记录的空会话**（多为无标题会话），",
+        "> 不应据此宣称该模型被实际使用过。",
         "> `copilot/auto` 表示由 Copilot 自动选择模型、未固定。",
         "",
         "> 说明：VS Code 会话文件是「快照 + 增量补丁」格式，补丁既可能整条追加请求",
@@ -363,7 +375,10 @@ def main() -> int:
     print(f"sessions={len(entries)} size={tot_mb:.1f}MB turns={tot_req} "
           f"in={tot_in} out={tot_out}")
     print("models(sessions): " + ", ".join(
-        f"{m}={len(s)}" for m, s in sorted(per_model.items(), key=lambda x: -len(x[1]))))
+        f"{m}=req{len(per_model_req.get(m, ()))}/sel{len(per_model_sel.get(m, ()))}"
+        for m in sorted(all_models,
+                        key=lambda x: (-len(per_model_req.get(x, ())),
+                                       -len(per_model_sel.get(x, ()))))))
     return 0
 
 

@@ -84,11 +84,17 @@ CONFIG_DEV_GPIO=y
 #
 # I2C0 — SSD1306 128x64 OLED (SDA 1 / SCL 2, 400 kHz, addr 0x3c)
 #
+# Pin order verified on real hardware against the production ESP-IDF gateway
+# firmware (apps/gateway_app/components/oled_ui/oled_ui.c):
+#     OLED_SDA_PIN = 1, OLED_SCL_PIN = 2
+# With SCL/SDA transposed the panel does not ACK and board_lcd_initialize()
+# returns -EIO on the real board.
+#
 CONFIG_I2C=y
 CONFIG_I2C_DRIVER=y
 CONFIG_ESP32S3_I2C0=y
-CONFIG_ESP32S3_I2C0_SCLPIN=1
-CONFIG_ESP32S3_I2C0_SDAPIN=2
+CONFIG_ESP32S3_I2C0_SCLPIN=2
+CONFIG_ESP32S3_I2C0_SDAPIN=1
 CONFIG_LCD=y
 CONFIG_LCD_DEV=y
 CONFIG_LCD_FRAMEBUFFER=y
@@ -194,3 +200,20 @@ CONFIG_TESTING_OSTEST=y
 #
 # CONFIG_GRAPHICS_LVGL is not set
 # CONFIG_EXAMPLES_LVGLDEMO is not set
+
+#
+# Build prerequisites that "make savedefconfig" strips because they equal
+# their Kconfig defaults, but which a fresh configure.sh may fail to re-apply
+# on a machine without kconfig-tweak. Without them the build breaks in two
+# confusing ways (both hit on real hardware during this port):
+#
+#   CONFIG_XTENSA_TOOLCHAIN_ESP  -> arch/xtensa/src/lx7/Toolchain.defs derives
+#       CROSSDEV from it. If unset, CROSSDEV is empty and CC falls back to the
+#       host gcc, which then rejects '-mlongcalls'.
+#   CONFIG_STACK_USAGE_WARNING   -> the same file does
+#       "ifneq ($(CONFIG_STACK_USAGE_WARNING),0)", so an *undefined* symbol
+#       (empty) is not equal to 0 and emits an invalid '-Wstack-usage=' that
+#       gcc rejects with "missing argument".
+#
+CONFIG_XTENSA_TOOLCHAIN_ESP=y
+CONFIG_STACK_USAGE_WARNING=0

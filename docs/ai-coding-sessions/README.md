@@ -27,11 +27,21 @@
   （按工作区名 `somato|openvela|vela` 过滤）
 - 提取方式：**逐字节原样复制**，未修改任何内容
 
-**小米 MiMo 的使用情况**：`mimo-v2.5-pro` 出现在 **18** 个会话、`mimo-v2.5` 出现在 **1** 个会话，
-由小米官方 Copilot 扩展 `sdmapvstool.xiaomimimo-for-copilot` 提供。
+**小米 MiMo 的使用情况**（由小米官方 Copilot 扩展 `sdmapvstool.xiaomimimo-for-copilot` 提供）。
+两种口径**必须分列，不可混用**：
 
-其它模型：`deepseek-v4-flash`(10)、`glm-5.2`(9)、`auto`(9)、`deepseek-flash`(2)、
-`claude-haiku-4.5`(1)、`claude-haiku-4-5-20251001`(1)。
+| 口径 | 含义 | `mimo-v2.5-pro` | `mimo-v2.5` | 合计 |
+| --- | --- | --- | --- | --- |
+| **有请求级证据** | 会话内每条请求记录的 `modelId` | **6** | **1** | **7** |
+| UI 中被选中 | composer 的 `inputState.selectedModel` | 18 | 0 | 18 |
+
+右列比左列多出的 11 个会话是**没有任何请求记录的空会话**（多为无标题会话），
+只是下拉框选中了 MiMo，不应据此宣称 MiMo 被实际使用过。
+本报告与 3.6 节一律采用**左列（请求级证据）**口径。
+这 7 个会话合计消耗 输入 **25,525,798** tok / 输出 **790,550** tok。
+
+其它模型（同样取请求级证据口径）：`deepseek-v4-flash`(8)、`glm-5.2`(6)、
+`deepseek-flash`(1)、`claude-haiku-4.5`(1)、`claude-haiku-4-5-20251001`(1)。
 
 > VS Code 会话文件是「快照 + 增量补丁」格式：先写整份 `{"kind":0,"v":{...}}` 快照，
 > 再追加以 `{"kind":1,"k":[...],"v":...}` 表示的补丁，补丁既可整条追加请求

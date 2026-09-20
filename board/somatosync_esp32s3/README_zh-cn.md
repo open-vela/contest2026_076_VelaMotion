@@ -184,6 +184,28 @@ esp32s3 的 Wi-Fi 适配层调用 `task_tls_alloc()` / `task_tls_get_value()` /
 undefined reference to `task_tls_alloc'
 ```
 
+**⑥ 两个「默认值」符号必须显式写进 defconfig（真机实测踩到）**
+
+`make savedefconfig` 会把等于 Kconfig 默认值的符号剥掉。以下两个符号一旦缺失，
+报错信息**完全不指向根因**，且只在「重新 configure 过、但 olddefconfig 没跑成」的
+机器上出现：
+
+| 符号 | 缺失时的表现 | 根因 |
+| --- | --- | --- |
+| `CONFIG_XTENSA_TOOLCHAIN_ESP=y` | `gcc: error: unrecognized command-line option '-mlongcalls'` | `arch/xtensa/src/lx7/Toolchain.defs` 由它推导 `CROSSDEV`；为空则 `CC` 回退成宿主 `gcc` |
+| `CONFIG_STACK_USAGE_WARNING=0` | `gcc: error: missing argument to '-Wstack-usage='` | 同一文件写的是 `ifneq ($(CONFIG_STACK_USAGE_WARNING),0)`，**未定义（空）≠ 0**，于是生成了空参数的 `-Wstack-usage=` |
+
+本仓两套 defconfig 已显式包含这两行。
+
+**⑦ 主机侧工具必须在 PATH 上**
+
+`make olddefconfig` 需要 `kconfig-conf`（来自 `prebuilts/kconfig-frontends/bin`；
+若该目录缺失，`configure.sh` 会报 `kconfig-conf: 未找到命令`，`.config` 只展开出
+defconfig 里那几十个符号，随后编译必然以 `#error Unknown XTENSA architecture` 失败）。
+`nuttx/tools/Unix.mk` 结尾的打包步骤需要 `esptool.py`。
+
+两者都不在本仓范围内，但会让「照着文档做却编不过」——排错时先确认它们存在。
+
 ### 4.2 编译命令
 
 openvela 统一入口是工作区根目录的 `build.sh`，参数为 **board config 路径**：
@@ -295,18 +317,56 @@ ls /dev/lcd0             # SSD1306 已注册为 LCD 字符设备
 
 ---
 
-## 八、已知限制与后续工作
+## 八、真机验证结果与已知限制
 
-本次提交是**可编译、可启动、可验证基础外设**的板级适配基线。以下部分明确
-不在本次范围内，或需要在真机上进一步确认：
+### 8.1 真机验证结果（2026-09-19，网关板）
 
-1. **需要真机确认的三个 chip/vendor 层钩子**（源码中以 `NOTE(verify)` 标注）：
-   - `ESP32S3_PIN2IRQ()`：W5500 INTn 的引脚→IRQ 映射宏名，
-     见 `arch/xtensa/src/esp32s3/`；
-   - `board_sdmmc_initialize()`：`esp32s3_board_sdmmc.h` 的归属与签名；
-   - `board_wlan_init()`：`esp32s3_board_wlan.h` 的归属与签名。
-   三者均按上游 `esp32s3-eye` 的调用方式书写，若头文件名或宏名不同，
-   各为一行修正。
+在 **SomatoSync 网关板**（ESP32-S3-WROOM-1，8 MB Octal PSRAM，16 MB flash）上完成
+首次真实硬件烧录与启动验证：
+
+- 芯片识别：`ESP32-S3 (QFN56) revision v0.2`，`Embedded PSRAM 8MB (AP_3v3)`，
+  `Detected flash size: 16MB`，MAC `28:84:85:52:c4:0c`
+- 烧录：`write-flash 0x0 nuttx.bin`（854,968 B），`Hash of data verified.`
+- **结果：openvela 内核成功启动**。串口任务表实测：
+
+  | PID | CPU | 状态 | 栈 | 任务 |
+  | --- | --- | --- | --- | --- |
+  | 0 | 0 | Assigned | 3040 | CPU0 IDLE |
+  | 1 | 1 | Running | 3040 | CPU1 IDLE |
+  | 2 | 0 | Waiting Semaphore | 4016 | hpwork |
+  | 3 | 0 | **Ready** | 3008 | **nsh_main** |
+  | 4 | 0 | Running | 6608 | wifi |
+
+  即双核 SMP 调度正常、工作队列就绪、NSH 已启动。
+
+**真机验证发现的缺陷（已修复）**：`board_lcd_initialize()` 返回 `-EIO`。
+对照量产 ESP-IDF 固件（`apps/gateway_app/components/oled_ui/oled_ui.c`：
+`OLED_SDA_PIN = 1`、`OLED_SCL_PIN = 2`）发现网关板 I2C 引脚顺序写反了
+（曾误写为 `SCL = 1 / SDA = 2`）。已修正 `include/board.h` 与
+`configs/gateway/defconfig`。**该缺陷只在真机上暴露** —— 编译、链接与符号核对全部通过。
+
+### 8.2 已知问题（尚未解决）
+
+**Wi-Fi 适配层在真机上 panic**。时间线：`t=0.75 s` OLED 初始化 →
+`t=3.63 s` Wi-Fi user panic：
+
+```
+_panic: User Exception: EXCCAUSE=001c task: wifi
+[CPU0] dump_assert_info: Assertion failed user panic ... task(CPU0): wifi
+```
+
+`EXCCAUSE=001c` 为 LoadProhibited。经 `addr2line` 解析符号，崩溃点位于
+`esp-hal-3rdparty/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls.c:93`
+的 `sha256_vector` —— 属 **esp-hal 上游无线适配层**，非本板级代码。
+panic 后系统进入 halt，因此**当前镜像还不能交付一个可交互的 `nsh>` 会话**。
+
+### 8.3 明确不在本次范围内的部分
+
+1. **三个 chip/vendor 层钩子的真机确认**（源码中以 `NOTE(verify)` 标注）：
+   - `board_wlan_init()`：**已确认真机上 panic**（见 8.2）；
+   - `board_sdmmc_initialize()`：`esp32s3_board_sdmmc.h` 的归属与签名待确认；
+   - `ESP32S3_PIN2IRQ()`：W5500 INTn 的引脚→IRQ 映射宏名待确认。
+   三者均按上游 `esp32s3-eye` 的调用方式书写。
 2. **ICM-42688 传感器驱动**：节点板双 IMU 的 SPI 总线已在 defconfig 与
    `board.h` 中就绪，但传感器注册默认关闭
    （`CONFIG_SOMATOSYNC_IMU=n`）—— 需先确认 `drivers/sensors/` 是否
@@ -314,12 +374,15 @@ ls /dev/lcd0             # SSD1306 已注册为 LCD 字符设备
 3. **PN5180 NFC 协议驱动**：本次只做板级 glue（SPI3 + BUSY/RST），
    「碰一碰配网」协议栈是后续工作。
 4. **ESP-NOW TDMA 协议层**：原固件的 `esp_tdma_mac` 组件尚未移植。
-   本次适配保证 Wi-Fi/ESP-NOW 的底层能力可用，协议层需另行移植。
 5. **电源与时序**：节点板的 LDO 门控与 ADC 分压 MOS 的时序需要在真机上
    标定，避免静态漏电。
-6. **defconfig 校正**：提交前请在真机上执行 `make menuconfig` +
-   `make savedefconfig`，把结果回写 `configs/*/defconfig`，使文件与
-   实际构建一致。
+6. **ESP32-P4 芯片层移植**：大赛发放的是 ESP32-P4X-Function-EV-Board
+   （官方《支持的硬件平台》「待适配开发板」第 1 项），但 openvela 目前
+   **没有 ESP32-P4 的芯片层支持**（`arch/risc-v/src/esp32p4` 不存在），
+   属从零开始的 RISC-V 芯片层移植，列为后续工作。
+7. **defconfig 校正**：本次已用 `olddefconfig` 展开后的结果核对过关键项；
+   仍建议在真机上执行 `make menuconfig` + `make savedefconfig` 后回写
+   `configs/*/defconfig`。
 
 ---
 

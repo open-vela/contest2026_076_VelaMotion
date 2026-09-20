@@ -82,7 +82,7 @@ contest2026_076_VelaMotion/
 │       └── README_zh-cn.md          # 板级适配指南（编译 / 烧录 / 逐外设验证）
 ├── logs/                            # AI Coding 对话日志（按 github_login/日期 归档）
 ├── docs/
-│   ├── 作品介绍.md                  # 作品介绍文档正文（可导出 .docx / .pdf）
+│   ├── 技术报告.md                  # 技术报告文档正文（可导出 .docx / .pdf）
 │   ├── 提交操作手册.md              # 提交动作清单（fork / PR / CLA / 日志）
 │   ├── reference/                   # 硬件资料：原理图、PCB 图、引脚来源溯源
 │   └── design/                      # 系统设计文档：架构 / 算法 / 协议 / 硬件
@@ -273,7 +273,7 @@ nsh> ifconfig eth0      # 网关板：W5500
 | --- | --- |
 | 板级适配代码 | `board/somatosync_esp32s3/` |
 | 板级适配指南（编译 / 烧录 / 逐外设验证 / 已知限制） | `board/somatosync_esp32s3/README_zh-cn.md` |
-| 作品介绍文档 | `docs/作品介绍.docx` ／ `docs/作品介绍.pdf` |
+| 技术报告文档 | `docs/技术报告.docx` ／ `docs/技术报告.pdf` |
 | **演示视频**（4 分 41 秒） | `docs/演示视频.mp4` |
 | 硬件资料（原理图 / PCB） | `docs/reference/` |
 | 系统设计文档（原型背景） | `docs/design/` |
